@@ -183,7 +183,7 @@ local config = {
       ["<leader>dS"] = { "<cmd>call vimspector#Stop()<cr>", desc = "Stop" },
       ["<leader>dc"] = { "<cmd>call vimspector#Continue()<cr>", desc = "Continue" },
       ["<leader>dp"] = { "<cmd>call vimspector#Pause()<cr>", desc = "Pause" },
-      ["<leader>dv"] = { "<cmd>call vimspector#Reset()<cr>", desc = "Reset" },
+      ["<leader>de"] = { "<cmd>call vimspector#Reset()<cr>", desc = "Reset" },
       ["<leader>dr"] = { "<cmd>call vimspector#Restart()<cr>", desc = "Restart" },
       ["<leader>dR"] = { "<cmd>call vimspector#RunToCursor()<cr>", desc = "Run to cursor" },
       ["<leader>dC"] = { "<cmd>call vimspector#GoToCurrentLine()", desc = "Go to current line" },
@@ -207,7 +207,6 @@ local config = {
       ["<leader>dfu"] = { "<cmd>call vimspector#UpFrame()<cr>", desc = "Up frame" },
       ["<leader>dfd"] = { "<cmd>call vimspector#DownFrame()<cr>", desc = "Down frame" },
 
-
       -- quick save
       -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
     },
@@ -217,7 +216,9 @@ local config = {
     },
     i = {
       ["<C-e>"] = { "copilot#Accept('<CR>')", silent = true, expr = true },
-    }
+    },
+    v = {
+    },
   },
 
   -- Configure plugins
