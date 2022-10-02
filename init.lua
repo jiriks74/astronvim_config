@@ -236,6 +236,9 @@ local config = {
       ["<leader>xs"] = { "<cmd>VimtexToggleMain<cr>", desc = "Set current file as 'current project'" },
       ["<leader>xa"] = { "<cmd>VimtexContextMenu<cr>", desc = "Show context menu" },
 
+      -- Autosave
+      ["<C-s>"] = { "<cmd>ASToggle<cr>", desc = "Toggle autosave" },
+
       -- quick save
       -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
     },
@@ -273,6 +276,12 @@ local config = {
       {
         "iamcco/markdown-preview.nvim",
         run = function() vim.fn["mkdp#util#install"]() end,
+      },
+      {
+        "Pocco81/auto-save.nvim",
+        config = function()
+          require("auto-save").setup()
+        end,
       },
 
       -- We also support a key value style plugin definition similar to NvChad:
