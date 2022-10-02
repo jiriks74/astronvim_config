@@ -47,13 +47,16 @@ nvim +PackerSync
   - Github's copilot plugin for Vim
   - To use the plugin you have to login with this command
     - `:Copilot setup`
+- [Pocco81/auto-save.nvim]()
+  - Plugin for autosave
 
 ## Extra mappings
 
 | Shortcut |   Vim keybind   |    Description    |
 |----------|-----------------|-------------------|
-| Space+A  | ["\<leader\>a"] | Alpha Dashboard   |
-| CTRL+E   | ["\<C-e\>"]     | Copilot accept    |
+| Space+a  | ["\<leader\>a"] | Alpha Dashboard   |
+| CTRL+e   | ["\<C-e\>"]     | Copilot accept    |
+| CTRL+s   | ["\<C-s\>"]     | Toggle autosave   |
 
 - Mappings for vimspector (debugging)
 
