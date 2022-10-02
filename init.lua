@@ -212,6 +212,30 @@ local config = {
       ["<leader>ms"] = { "<cmd>MarkdownPreviewStop<cr>", desc = "Markdown preview stop" },
       ["<leader>mt"] = { "<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown preview toggle" },
 
+      -- Vimtex mappings
+      ["<leader>xi"] = { "<cmd>VimtexInfo<cr>", desc = "Info" },
+      ["<leader>xI"] = { "<cmd>VimtexInfoFull<cr>", desc = "Full info" },
+      ["<leader>xt"] = { "<cmd>VimtexTocOpen<cr>", desc = "Open table of contents" },
+      ["<leader>xT"] = { "<cmd>VimtexTocToggle<cr>", desc = "Toggle table of contents" },
+      ["<leader>xq"] = { "<cmd>VimtexLog<cr>", desc = "Log" },
+      ["<leader>xv"] = { "<cmd>VimtexView<cr>", desc = "View" },
+      ["<leader>xr"] = { "<cmd>VimtexReverseSearch<cr>", desc = "Reverse search" },
+      ["<leader>xl"] = { "<cmd>VimtexCompile<cr>", desc = "Compile (toggle)" },
+      ["<leader>xL"] = { "<cmd>VimtexCompileSelected<cr>", desc = "Compile selected" },
+      ["<leader>xk"] = { "<cmd>VimtexStop<cr>", desc = "Stop compilation" },
+      ["<leader>xK"] = { "<cmd>VimtexStopAll<cr>", desc = "Stop all compilations" },
+      ["<leader>xe"] = { "<cmd>VimtexErrors<cr>", desc = "Open quickfix window" },
+      ["<leader>xo"] = { "<cmd>VimtexCompileOutput<cr>", desc = "Open compiler output" },
+      ["<leader>xg"] = { "<cmd>VimtexStatus<cr>", desc = "Compilation status" },
+      ["<leader>xG"] = { "<cmd>VimtexStatusAll<cr>", desc = "Show all compilations' status" },
+      ["<leader>xc"] = { "<cmd>VimtexClean<cr>", desc = "Clean auxiliary files" },
+      ["<leader>xC"] = { "<cmd>VimtexClean!<cr>", desc = "As Clean, but also remove output files" },
+      ["<leader>xm"] = { "<cmd>VimtexImapsList<cr>", desc = "Show list of mappings created by vimtex-imaps" },
+      ["<leader>xx"] = { "<cmd>VimtexReload<cr>", desc = "Reload vimtex" },
+      ["<leader>xX"] = { "<cmd>VimtexReloadState<cr>", desc = "Reload the state for the current buffer" },
+      ["<leader>xs"] = { "<cmd>VimtexToggleMain<cr>", desc = "Set current file as 'current project'" },
+      ["<leader>xa"] = { "<cmd>VimtexContextMenu<cr>", desc = "Show context menu" },
+
       -- quick save
       -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
     },
@@ -261,7 +285,7 @@ local config = {
     },
     -- All other entries override the require("<key>").setup({...}) call for default plugins
     ["null-ls"] = function(config) -- overrides `require("null-ls").setup(config)`
-      -- config variable is the default configuration table for the setup functino call
+      -- config variable is the default configuration table for the setup function call
       -- local null_ls = require "null-ls"
 
       -- Check supported formatters and linters
