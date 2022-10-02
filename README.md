@@ -47,7 +47,7 @@ nvim +PackerSync
   - Github's copilot plugin for Vim
   - To use the plugin you have to login with this command
     - `:Copilot setup`
-- [Pocco81/auto-save.nvim]()
+- [Pocco81/auto-save.nvim](https://github.com/Pocco81/auto-save.nvim)
   - Plugin for autosave
 
 ## Extra mappings
