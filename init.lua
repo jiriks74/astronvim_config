@@ -173,7 +173,7 @@ local config = {
     n = {
       -- second key is the lefthand side of the map
       -- mappings seen under group name "Buffer"
-      ["<leader>m"] = { "<cmd>Alpha<cr>", desc = "Alpha Dashboard" },
+      ["<leader>a"] = { "<cmd>Alpha<cr>", desc = "Alpha Dashboard" },
       ["<leader>bb"] = { "<cmd>tabnew<cr>", desc = "New tab" },
       ["<leader>bc"] = { "<cmd>BufferLinePickClose<cr>", desc = "Pick to close" },
       ["<leader>bj"] = { "<cmd>BufferLinePick<cr>", desc = "Pick to jump" },
@@ -206,6 +206,11 @@ local config = {
       -- Frames
       ["<leader>dfu"] = { "<cmd>call vimspector#UpFrame()<cr>", desc = "Up frame" },
       ["<leader>dfd"] = { "<cmd>call vimspector#DownFrame()<cr>", desc = "Down frame" },
+
+      -- Mardown preview
+      ["<leader>mp"] = { "<cmd>MarkdownPreview<cr>", desc = "Markdown preview" },
+      ["<leader>ms"] = { "<cmd>MarkdownPreviewStop<cr>", desc = "Markdown preview stop" },
+      ["<leader>mt"] = { "<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown preview toggle" },
 
       -- quick save
       -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
@@ -241,6 +246,10 @@ local config = {
       {"puremourning/vimspector"},
       {"lervag/vimtex"},
       {"jiriks74/vim-pio"},
+      {
+        "iamcco/markdown-preview.nvim",
+        run = function() vim.fn["mkdp#util#install"]() end,
+      },
 
       -- We also support a key value style plugin definition similar to NvChad:
       -- ["ray-x/lsp_signature.nvim"] = {
@@ -334,6 +343,7 @@ local config = {
             ["s"] = { name = "Step" },
             ["f"] = { name = "Frames" },
           },
+          ["m"] = { name = "Markdown" },
         },
       },
     },
