@@ -159,7 +159,7 @@ local config = {
       -- }
       clangd = {
         capabilities = { offsetEncoding = "utf-8" },
-      }
+      },
     },
   },
 
@@ -238,7 +238,9 @@ local config = {
       --   end,
       -- },
       {"github/copilot.vim"},
-      {"puremourning/vimspector"}
+      {"puremourning/vimspector"},
+      {"lervag/vimtex"},
+      {"jiriks74/vim-pio"},
 
       -- We also support a key value style plugin definition similar to NvChad:
       -- ["ray-x/lsp_signature.nvim"] = {
