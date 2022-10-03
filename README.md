@@ -17,10 +17,17 @@
   ```
 
 - Clone my config into `~/.config/nvim/lua/user`
+  - For NeoVim >= 8.0
 
-```bash
-git clone https://github.com/jiriks74/astronvim_config ~/.config/nvim/lua/user
-```
+  ```bash
+  git clone https://github.com/jiriks74/astronvim_config ~/.config/nvim/lua/user
+  ```
+
+  - For NeoVim < 8.0 use `neovim7.2` branch
+
+  ```bash
+  git clone -b neovim7.2 https://github.com/jiriks74/astronvim_config ~/.config/nvim/lua/user
+  ```
 
 - Open nvim and run `:PackerSync`
 
