@@ -17,10 +17,17 @@
   ```
 
 - Clone my config into `~/.config/nvim/lua/user`
+  - For NeoVim >= 8.0
 
-```bash
-git clone https://github.com/jiriks74/astronvim_config ~/.config/nvim/lua/user
-```
+  ```bash
+  git clone https://github.com/jiriks74/astronvim_config ~/.config/nvim/lua/user
+  ```
+
+  - For NeoVim < 8.0 use `neovim7.2` branch
+
+  ```bash
+  git clone -b neovim7.2 https://github.com/jiriks74/astronvim_config ~/.config/nvim/lua/user
+  ```
 
 - Open nvim and run `:PackerSync`
 
@@ -40,8 +47,9 @@ nvim +PackerSync
 - [vimtex](https://github.com/lervag/vimtex)
   - A plugin for, you guessed it, LaTex
   - I have not yet learned LaTex, so I haven't tried this plugin out.
+  - This plugin needs you to have LaTeX installed on your system. To see more go to the [vimtex repository](https://github.com/lervag/vimtex)
   Hopefully I'll learn it and try out this plugin soon
-- [markdown-preview.nvim](htps://github.com/iamcco/markdown-preview.nvim)
+- [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)
   - Plugin for live markdown preview in a web browser
 - [copilot.vim](https://github.com/github/copilot.vim)
   - Github's copilot plugin for Vim
