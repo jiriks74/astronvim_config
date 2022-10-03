@@ -39,7 +39,7 @@ nvim +PackerSync
 
 - [vimspector](https://github.com/puremourning/vimspector)
   - Simple plugin for debugging
-  - You need `neovim` python module installed
+  - You need have to have `neovim` python module installed
 
   ```bash
   pip3 install neovim
