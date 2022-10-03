@@ -35,6 +35,26 @@
 nvim +PackerSync
 ```
 
+## Useful info
+
+- Folding with treesitter
+  - To get folding for your language, you need to run
+  `:TSInstall <language>` (eg. `TSInstall cpp` to get C++ folding)
+- Install language servers
+  - Use `Space+p+I` keybind to open install menu.
+    - To install package under the cursor, press `i`
+    - To uninstall package under the cursor press `X`
+- Debugging
+  - See `vimspector` under [`Extra plugin included`](#extra-plugins-included)
+- LaTeX
+  - To use `vimtex` plugin, you need to have LaTeX installed
+    - [`texlive-most`](https://wiki.archlinux.org/title/TeX_Live#Installation) package on ArchLinux
+- PlatformIO
+  - If you want to use PlatformIO, you need to have `pio` installed
+  - To create a project, run `:PIONewProject`
+  - To include a library, run `:PIOAddLibrary`
+  - For more commands, go to [`vim-pio`'s repository](https://github.com/jiriks74/vim-pio)
+
 ## Extra plugins included
 
 - [vimspector](https://github.com/puremourning/vimspector)
@@ -66,13 +86,13 @@ nvim +PackerSync
 
 ## Extra mappings
 
-| Shortcut |   Vim keybind   |    Description    |
-|----------|-----------------|-------------------|
-| Space+a  | ["\<leader\>a"] | Alpha Dashboard   |
-| CTRL+e   | ["\<C-e\>"]     | Copilot accept    |
-| CTRL+s   | ["\<C-s\>"]     | Toggle autosave   |
+| Shortcut |   Vim keybind    |    Description    |
+|----------|------------------|-------------------|
+| Space+a  | ["\<leader\>uD"] | Alpha Dashboard   |
+| CTRL+e   | ["\<C-e\>"]      | Copilot accept    |
+| CTRL+s   | ["\<C-s\>"]      | Toggle autosave   |
 
-- Mappings for vimspector (debugging)
+### Mappings for vimspector (debugging)
 
 |   Shortcut  |    Vim keybind    |     Description    |
 |-------------|-------------------|--------------------|
@@ -103,10 +123,27 @@ nvim +PackerSync
 
 There are also some [VSCode like keybinds setup by the plugin](https://github.com/puremourning/vimspector#visual-studio--vscode)
 
-- Mappings for markdown preview
+### Mappings for markdown preview
 
 | Shortcut  |   Vim keybind    |       Description       |
 |-----------|------------------|-------------------------|
 | Space+m+p | ["\<leader\>mp"] | Markdown preview        |
 | Space+m+s | ["\<leader\>ms"] | Markdown preview stop   |
 | Space+m+t | ["\<leader\>mt"] | Markdown preview toggle |
+
+### Mappings for `vimtex`
+
+## TODO
+
+- [ ] [Mappings for `vimtex`](#mappings-for-vimtex)
+- [ ] Better section for `vim-pio`
+- [ ] Add section for setting up debugging
+- [ ] Add mappings for `treesitter` install?
+- [ ] Add requirements section
+  - So you don't have to go through [Extra plugins included](#extra-plugins-included) to know what to install
+- [ ] Better [`README.md`](https://github.com/jiriks74/astronvim_config/blob/neovim7.2/README.md)
+  for [`neovim7.2`](https://github.com/jiriks74/astronvim_config/tree/neovim7.2) branch
+  - [ ] Add section redirecting to [`neovim72`](https://github.com/jiriks74/astronvim_config/tree/neovim7.2)
+  branch's [`README.md`](https://github.com/jiriks74/astronvim_config/blob/neovim7.2/README.md) it user has Neovim < 8.0
+- [ ] Add `.vimspector.json` template
+- [ ] Setting up simple wiki?

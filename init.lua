@@ -44,6 +44,8 @@ local config = {
       spell = true, -- sets vim.opt.spell
       signcolumn = "auto", -- sets vim.opt.signcolumn to auto
       wrap = false, -- sets vim.opt.wrap
+      foldexpr = "nvim_treesitter#foldexpr()", -- set Treesitter based folding
+      foldmethod = "expr",
     },
     g = {
       mapleader = " ", -- sets vim.g.mapleader
@@ -199,6 +201,7 @@ local config = {
       ["<leader>bc"] = { "<cmd>BufferLinePickClose<cr>", desc = "Pick to close" },
       ["<leader>bj"] = { "<cmd>BufferLinePick<cr>", desc = "Pick to jump" },
       ["<leader>bt"] = { "<cmd>BufferLineSortByTabs<cr>", desc = "Sort by tabs" },
+      ["<leader>uD"] = { "<cmd>Alpha<cr>", desc = "Alpha dashboard" },
 
       ["<leader>dd"] = { "<cmd>call vimspector#Launch()<cr>", desc = "Launch" },
       ["<leader>dS"] = { "<cmd>call vimspector#Stop()<cr>", desc = "Stop" },
