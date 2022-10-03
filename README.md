@@ -16,10 +16,10 @@
   nvim +PackerSync
   ```
 
-- Clone my config into `~/.config/nvim/user`
+- Clone my config into `~/.config/nvim/lua/user`
 
 ```bash
-git clone https://github.com/jiriks74/astronvim_config ~/.config/nvim/user
+git clone https://github.com/jiriks74/astronvim_config ~/.config/nvim/lua/user
 ```
 
 - Open nvim and run `:PackerSync`
