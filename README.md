@@ -39,6 +39,12 @@ nvim +PackerSync
 
 - [vimspector](https://github.com/puremourning/vimspector)
   - Simple plugin for debugging
+  - You need have to have `neovim` python module installed
+
+  ```bash
+  pip3 install neovim
+  ```
+
   - You have to create a file with `Launch` config - see the [plugin repository](https://github.com/puremourning/vimspector)
 - [vim-pio](https://github.com/jiriks74/vim-pio)
   - PlatformIO vim plugin
