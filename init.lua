@@ -179,6 +179,9 @@ local config = {
       --     },
       --   },
       -- },
+      clangd = {
+        capabilities = { offsetEncoding = "utf-8" },
+      }
     },
   },
 
