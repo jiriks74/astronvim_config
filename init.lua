@@ -11,7 +11,7 @@ local config = {
     remote = "origin", -- remote to use
     channel = "nightly", -- "stable" or "nightly"
     version = "latest", -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
-    branch = "main", -- branch name (NIGHTLY ONLY)
+    branch = "nightly", -- branch name (NIGHTLY ONLY)
     commit = nil, -- commit hash (NIGHTLY ONLY)
     pin_plugins = nil, -- nil, true, false (nil will pin plugins on stable only)
     skip_prompts = false, -- skip prompts about breaking changes
@@ -381,6 +381,7 @@ local config = {
             ["f"] = { name = "Frames" },
           },
           ["m"] = { name = "Markdown" },
+          ["x"] = { name = "LaTeX" },
         },
       },
     },
