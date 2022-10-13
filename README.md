@@ -147,3 +147,4 @@ There are also some [VSCode like keybinds setup by the plugin](https://github.co
   branch's [`README.md`](https://github.com/jiriks74/astronvim_config/blob/neovim7.2/README.md) it user has Neovim < 8.0
 - [ ] Add `.vimspector.json` template
 - [ ] Setting up simple wiki?
+- [ ] Add section for ["weirongxu/plantuml-previewer.vim"](https://github.com/weirongxu/plantuml-previewer.vim)

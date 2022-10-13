@@ -30,7 +30,10 @@ local config = {
 
   -- Add highlight groups in any theme
   highlights = {
-    -- duskfox = { -- a table of overrides/changes to the default
+    -- init = { -- this table overrides highlights in all themes
+    --   Normal = { bg = "#000000" },
+    -- }
+    -- duskfox = { -- a table of overrides/changes to the duskfox theme
     --   Normal = { bg = "#000000" },
     -- },
   },
@@ -41,11 +44,9 @@ local config = {
       -- set to true or false etc.
       relativenumber = true, -- sets vim.opt.relativenumber
       number = true, -- sets vim.opt.number
-      spell = true, -- sets vim.opt.spell
+      spell = false, -- sets vim.opt.spell
       signcolumn = "auto", -- sets vim.opt.signcolumn to auto
       wrap = false, -- sets vim.opt.wrap
-      foldexpr = "nvim_treesitter#foldexpr()", -- set Treesitter based folding
-      foldmethod = "expr",
     },
     g = {
       mapleader = " ", -- sets vim.g.mapleader
@@ -135,16 +136,12 @@ local config = {
 
   -- Extend LSP configuration
   lsp = {
-    on_attach = function(client, bufnr)
-      if client.server_capabilities.documentFormattingProvider then
-        vim.api.nvim_del_augroup_by_name "auto_format"
-      end
-    end,
     -- enable servers that you already have installed without mason
     servers = {
       -- "pyright"
     },
     formatting = {
+      format_on_save = false, -- enable or disable auto formatting on save
       disabled = { -- disable formatting capabilities for the listed clients
         -- "sumneko_lua",
       },
@@ -211,14 +208,17 @@ local config = {
       ["<leader>dr"] = { "<cmd>call vimspector#Restart()<cr>", desc = "Restart" },
       ["<leader>dR"] = { "<cmd>call vimspector#RunToCursor()<cr>", desc = "Run to cursor" },
       ["<leader>dC"] = { "<cmd>call vimspector#GoToCurrentLine()", desc = "Go to current line" },
-      ["<leader>dP"] = { "<cmd>call vimspector#JumpToProgramCounter()<cr>", desc = "Move Cursor to the program counter in current frame" },
+      ["<leader>dP"] = { "<cmd>call vimspector#JumpToProgramCounter()<cr>",
+        desc = "Move Cursor to the program counter in current frame" },
 
       -- Breakpoints
       ["<leader>dbt"] = { "<cmd>call vimspector#ToggleBreakpoint()<cr>", desc = "Toggle breakpoint" },
       ["<leader>dbl"] = { "<cmd>call vimspector#ListBreakpoints()<cr>", desc = "List breakpoints" },
       ["<leader>dbc"] = { "<cmd>call vimspector#ClearBreakpoints()<cr>", desc = "Clear breakpoints" },
-      ["<leader>dbC"] = { "<cmd>call vimspector#ToggleBreakpoint( { trigger expr, hit count expr } )<cr>", desc = "Toggle CBreakpoint or LogPoint on current line"},
-      ["<leader>dbf"] = { "<cmd>call vimspector#AddFunctionBreakpoint( '<cexpr>' )<cr>", desc = "Add a function breakpoint for expression under cursor"},
+      ["<leader>dbC"] = { "<cmd>call vimspector#ToggleBreakpoint( { trigger expr, hit count expr } )<cr>",
+        desc = "Toggle CBreakpoint or LogPoint on current line" },
+      ["<leader>dbf"] = { "<cmd>call vimspector#AddFunctionBreakpoint( '<cexpr>' )<cr>",
+        desc = "Add a function breakpoint for expression under cursor" },
       ["<leader>dbn"] = { "<cmd>call vimspector#JumpToNextBreakpoint()<cr>", desc = "Jump to next breakpoint" },
       ["<leader>dbp"] = { "<cmd>call vimspector#JumpToPreviousBreakpoint()<cr>", desc = "Jump to previous breakpoint" },
 
@@ -292,10 +292,10 @@ local config = {
       --   end,
       -- },
       --
-      {"github/copilot.vim"},
-      {"puremourning/vimspector"},
-      {"lervag/vimtex"},
-      {"jiriks74/vim-pio"},
+      { "github/copilot.vim" },
+      { "puremourning/vimspector" },
+      { "lervag/vimtex" },
+      { "jiriks74/vim-pio" },
       {
         "iamcco/markdown-preview.nvim",
         run = function() vim.fn["mkdp#util#install"]() end,
@@ -306,7 +306,9 @@ local config = {
           require("auto-save").setup()
         end,
       },
-
+      { "weirongxu/plantuml-previewer.vim" },
+      { "aklt/plantuml-syntax" },
+      { "tyru/open-browser.vim" },
 
       -- We also support a key value style plugin definition similar to NvChad:
       -- ["ray-x/lsp_signature.nvim"] = {
@@ -315,6 +317,13 @@ local config = {
       --     require("lsp_signature").setup()
       --   end,
       -- },
+      -- ["weirongxu/plantuml-previewer.vim"] = {
+      --   requires = { {"aklt/plantuml-syntax"} },
+      --   -- depends = "aklt/plantuml-syntax",
+      --   requires = { {"tyru/open-browser.vim"} },
+      --   -- depends = "tyru/open-browser.vim",
+      -- },
+
     },
     -- All other entries override the require("<key>").setup({...}) call for default plugins
     ["null-ls"] = function(config) -- overrides `require("null-ls").setup(config)`
@@ -338,8 +347,8 @@ local config = {
     ["mason-lspconfig"] = { -- overrides `require("mason-lspconfig").setup(...)`
       -- ensure_installed = { "sumneko_lua" },
     },
-    -- use mason-tool-installer to configure DAP/Formatters/Linter installation
-    ["mason-tool-installer"] = { -- overrides `require("mason-tool-installer").setup(...)`
+    -- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
+    ["mason-null-ls"] = { -- overrides `require("mason-null-ls").setup(...)`
       -- ensure_installed = { "prettier", "stylua" },
     },
   },
@@ -380,7 +389,7 @@ local config = {
           -- third key is the key to bring up next level and its displayed
           -- group name in which-key top level menu
           ["b"] = { name = "Buffer" },
-          ["d"] = { 
+          ["d"] = {
             name = "Debugging",
             ["b"] = { name = "Breakpoints" },
             ["s"] = { name = "Step" },
@@ -416,6 +425,7 @@ local config = {
         require("alpha").start(true)
       end
     end
+
     vim.keymap.del("n", "<leader>c")
     if require("core.utils").is_available "bufdelete.nvim" then
       vim.keymap.set("n", "<leader>c", function()
