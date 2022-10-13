@@ -224,7 +224,7 @@ local config = {
 
       -- Step
       ["<leader>dss"] = { "<cmd>call vimspector#StepOver()<cr>", desc = "Step over" },
-      ["<leader>dsi"] = { "<cmd>call vimspector#StepOver()<cr>", desc = "Step into" },
+      ["<leader>dsi"] = { "<cmd>call vimspector#StepInto()<cr>", desc = "Step into" },
       ["<leader>dso"] = { "<cmd>call vimspector#StepOut()<cr>", desc = "Step out" },
 
       -- Frames
