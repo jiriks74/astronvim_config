@@ -295,7 +295,7 @@ local config = {
       { "github/copilot.vim" },
       { "puremourning/vimspector" },
       { "lervag/vimtex" },
-      { "jiriks74/vim-pio" },
+      { "normen/vim-pio" },
       {
         "iamcco/markdown-preview.nvim",
         run = function() vim.fn["mkdp#util#install"]() end,
