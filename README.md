@@ -1,6 +1,6 @@
 # My [AstroNvim](https://github.com/AstroNvim/AstroNvim) config
 
-## How to install my config
+## How to install my config on merlin
 
 - First you have to install AstroNvim
   - Backup your previous nvim config
@@ -23,17 +23,43 @@
   git clone https://github.com/jiriks74/astronvim_config ~/.config/nvim/lua/user
   ```
 
-  - For NeoVim < 8.0 use `neovim7.2` branch
-
-  ```bash
-  git clone -b neovim7.2 https://github.com/jiriks74/astronvim_config ~/.config/nvim/lua/user
-  ```
-
 - Open nvim and run `:PackerSync`
+  - **This will result in errors as `merlin` kills most of the clone processes**
+  - To make this work you need to press `R` (yes, capital) to download all the
+  failed downloads
+    - You have to do this until all plugins have been successfully downloaded
 
 ```bash
 nvim +PackerSync
 ```
+
+## Updating
+
+```bash
+cd ~/.config/nvim
+git pull
+cd lua/user
+git pull
+```
+
+- To update the plugins you need to first remove all the downloaded plugins
+(or plugin downloading will fail)
+
+```bash
+rm -rf ~/.local/share/nvim
+```
+
+- Then you need to repeat the process as if you were initializing AstroNvim for
+the first time:
+  - Open nvim and run `:PackerSync`
+    - **This will result in errors as `merlin` kills most of the clone processes**
+    - To make this work you need to press `R` (yes, capital) to download all the
+    failed downloads
+      - You have to do this until all plugins have been successfully downloaded
+
+  ```bash
+  nvim +PackerSync
+  ```
 
 ## Useful info
 
