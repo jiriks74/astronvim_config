@@ -142,7 +142,6 @@ local config = {
     -- enable servers that you already have installed without mason
     servers = {
       -- "pyright"
-      "clangd"
     },
     formatting = {
       format_on_save = false, -- enable or disable auto formatting on save
@@ -306,13 +305,20 @@ local config = {
       { "github/copilot.vim" },
       { "puremourning/vimspector" },
       { "lervag/vimtex" },
+      { "normen/vim-pio" },
+      {
+        "iamcco/markdown-preview.nvim",
+        run = function() vim.fn["mkdp#util#install"]() end,
+      },
       {
         "Pocco81/auto-save.nvim",
         config = function()
           require("auto-save").setup()
         end,
       },
+      { "weirongxu/plantuml-previewer.vim" },
       { "aklt/plantuml-syntax" },
+      { "tyru/open-browser.vim" },
 
       -- We also support a key value style plugin definition similar to NvChad:
       -- ["ray-x/lsp_signature.nvim"] = {
@@ -320,6 +326,12 @@ local config = {
       --   config = function()
       --     require("lsp_signature").setup()
       --   end,
+      -- },
+      -- ["weirongxu/plantuml-previewer.vim"] = {
+      --   requires = { {"aklt/plantuml-syntax"} },
+      --   -- depends = "aklt/plantuml-syntax",
+      --   requires = { {"tyru/open-browser.vim"} },
+      --   -- depends = "tyru/open-browser.vim",
       -- },
 
     },
