@@ -55,9 +55,10 @@ local config = {
       diagnostics_enabled = true, -- enable diagnostics at start
       status_diagnostics_enabled = true, -- enable diagnostics in statusline
 
-      copilot_no_tab_map = true,
-      copilot_assume_mapped = true,
-      copilot_tab_fallback = "",
+      -- copilot_no_tab_map = true,
+      -- copilot_assume_mapped = true,
+      -- copilot_tab_fallback = "",
+
       vimspector_enable_mappings = 'VISUAL_STUDIO',
     },
   },
@@ -266,13 +267,16 @@ local config = {
       -- quick save
       -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
     },
+    i = {
+      -- ["<Tab>"] = { "copilot#Accept('<CR>')", silent = true, expr = true },
+      -- ["<Tab>"] = { "copilot#Accept('<CR>')" },
+      -- Oopen cmp menu
+      ["<C-Space>"] = { "cmp#complete()", silent = true, expr = true },
+    },
     t = {
       -- setting a mapping to false will disable it
       -- ["<esc>"] = false,
     },
-    i = {
-      ["<C-e>"] = { "copilot#Accept('<CR>')", silent = true, expr = true },
-    }
   },
 
   -- Configure plugins
@@ -292,14 +296,43 @@ local config = {
       --   end,
       -- },
       --
-      { 
+      {
         "folke/todo-comments.nvim",
         event = "BufRead",
         config = function()
           require("todo-comments").setup()
         end,
       },
-      { "github/copilot.vim" },
+      {
+        "zbirenbaum/copilot.lua",
+        -- event = "VimEnter",
+        event = "BufRead",
+        -- after = "feline.nvim",
+        config = function()
+          vim.defer_fn(function()
+            require("copilot").setup()
+          end, 100)
+        end,
+      },
+      -- { "github/copilot.vim" },
+      {
+        "zbirenbaum/copilot-cmp",
+        -- after = "copilot.lua",
+        after = { "nvim-cmp", "copilot.lua" },
+        config = function()
+          -- astronvim.add_cmp_source("copilot_cmp")
+          astronvim.add_cmp_source({ name = "copilot", priority = 1050, keyword_length = -1, max_item_count = 4 })
+          require("copilot_cmp").setup {
+            method = "getCompletionsCycling",
+            -- method = "getPanelCompletions",
+            formatters = {
+              label = require("copilot_cmp.format").format_label_text,
+              insert_text = require("copilot_cmp.format").format_insert_text,
+              preview = require("copilot_cmp.format").deindent,
+            },
+          }
+        end,
+      },
       { "puremourning/vimspector" },
       { "lervag/vimtex" },
       { "normen/vim-pio" },
@@ -383,6 +416,33 @@ local config = {
       buffer = 500,
       path = 250,
     },
+    -- mappings = {
+    --   ["<Tab>"] = cmp.mapping(function(fallback)
+    --     if luasnip.expandable() then
+    --       luasnip.expand()
+    --     elseif luasnip.expand_or_jumpable() then
+    --       luasnip.expand_or_jump()
+    --     elseif has_words_before() then
+    --       cmp.complete()
+    --     else
+    --       fallback()
+    --     end
+    --   end, {
+    --     "i",
+    --     "s",
+    --   }),
+    --   ["<S-Tab>"] = cmp.mapping(function(fallback)
+    --     if luasnip.jumpable(-1) then
+    --       luasnip.jump(-1)
+    --     else
+    --       fallback()
+    --     end
+    --   end, {
+    --     "i",
+    --     "s",
+    --   }),
+    --
+    -- }
   },
 
   -- Modify which-key registration (Use this with mappings table in the above.)
