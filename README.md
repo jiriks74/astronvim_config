@@ -1,6 +1,6 @@
 # My [AstroNvim](https://github.com/AstroNvim/AstroNvim) config
 
-## How to install my config on merlin
+## How to install my config on merli
 
 - First you have to install AstroNvim
   - Backup your previous nvim config

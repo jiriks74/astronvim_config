@@ -1,3 +1,6 @@
+local cmp = require('cmp')
+-- Never gonna give you up
+-- Never gonna
 --              AstroNvim Configuration Table
 -- All configuration changes should go inside of the table below
 
@@ -272,7 +275,7 @@ local config = {
       -- ["<esc>"] = false,
     },
     i = {
-      ["<C-e>"] = { "copilot#Accept('<CR>')", silent = true, expr = true },
+      -- ["<Tab>"] = { "copilot#Accept('<CR>')", silent = true, expr = true },
     }
   },
 
@@ -293,23 +296,23 @@ local config = {
       --   end,
       -- },
       --
-      -- { "github/copilot.vim" },
+      {
+        "folke/todo-comments.nvim",
+        event = "BufRead",
+        config = function()
+          require("todo-comments").setup()
+        end,
+      },
+      { "github/copilot.vim" },
       { "puremourning/vimspector" },
       { "lervag/vimtex" },
-      -- { "normen/vim-pio" },
-      -- {
-      --   "iamcco/markdown-preview.nvim",
-      --   run = function() vim.fn["mkdp#util#install"]() end,
-      -- },
       {
         "Pocco81/auto-save.nvim",
         config = function()
           require("auto-save").setup()
         end,
       },
-      -- { "weirongxu/plantuml-previewer.vim" },
       { "aklt/plantuml-syntax" },
-      -- { "tyru/open-browser.vim" },
 
       -- We also support a key value style plugin definition similar to NvChad:
       -- ["ray-x/lsp_signature.nvim"] = {
@@ -317,12 +320,6 @@ local config = {
       --   config = function()
       --     require("lsp_signature").setup()
       --   end,
-      -- },
-      -- ["weirongxu/plantuml-previewer.vim"] = {
-      --   requires = { {"aklt/plantuml-syntax"} },
-      --   -- depends = "aklt/plantuml-syntax",
-      --   requires = { {"tyru/open-browser.vim"} },
-      --   -- depends = "tyru/open-browser.vim",
       -- },
 
     },
