@@ -1,3 +1,6 @@
+local cmp = require('cmp')
+-- Never gonna give you up
+-- Never gonna
 --              AstroNvim Configuration Table
 -- All configuration changes should go inside of the table below
 
@@ -271,7 +274,7 @@ local config = {
       -- ["<esc>"] = false,
     },
     i = {
-      ["<C-e>"] = { "copilot#Accept('<CR>')", silent = true, expr = true },
+      -- ["<Tab>"] = { "copilot#Accept('<CR>')", silent = true, expr = true },
     }
   },
 
@@ -292,7 +295,7 @@ local config = {
       --   end,
       -- },
       --
-      { 
+      {
         "folke/todo-comments.nvim",
         event = "BufRead",
         config = function()
