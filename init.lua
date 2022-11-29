@@ -1,6 +1,3 @@
-local cmp = require('cmp')
--- Never gonna give you up
--- Never gonna
 --              AstroNvim Configuration Table
 -- All configuration changes should go inside of the table below
 
