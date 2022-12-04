@@ -47,6 +47,11 @@ local config = {
       spell = false, -- sets vim.opt.spell
       signcolumn = "auto", -- sets vim.opt.signcolumn to auto
       wrap = false, -- sets vim.opt.wrap
+
+      -- Treesitter
+      foldenable = false,
+      foldexpr = "nvim_treesitter#foldexpr()", -- set Treesitter based folding
+      foldmethod = "expr",
     },
     g = {
       mapleader = " ", -- sets vim.g.mapleader
@@ -59,6 +64,12 @@ local config = {
       copilot_assume_mapped = true,
       copilot_tab_fallback = "",
       vimspector_enable_mappings = 'VISUAL_STUDIO',
+
+      -- Taglist
+      Tlist_Use_Right_Window = 1,
+      Tlist_GainFocus_On_ToggleOpen = 1,
+      Tlist_Auto_Update = 1,
+      -- Tlist_Close_On_Select = 1,
     },
   },
   -- If you need more control, you can use the function()...end notation
@@ -260,6 +271,18 @@ local config = {
       ["<leader>xs"] = { "<cmd>VimtexToggleMain<cr>", desc = "Set current file as 'current project'" },
       ["<leader>xa"] = { "<cmd>VimtexContextMenu<cr>", desc = "Show context menu" },
 
+      -- Taglist
+      ["<leader>ft"] = { "<cmd>TlistToggle<cr>", desc = "Tagbar toggle " },
+
+      -- Trouble
+      ["<leader>ttx"] = { "<cmd>TroubleToggle<cr>", desc = "Toggle Trouble" },
+      ["<leader>ttw"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace diagnostics" },
+      ["<leader>ttd"] = { "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document diagnostics" },
+      ["<leader>ttq"] = { "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix" },
+      ["<leader>ttl"] = { "<cmd>TroubleToggle loclist<cr>", desc = "Loc List" },
+      ["<leader>ttR"] = { "<cmd>TroubleToggle lsp_references<cr>", desc = "Lsp references" },
+      ["<leader>ttt"] = { "<cmd>TodoTrouble<cr>", desc = "Todo Trouble" },
+
       -- Autosave
       ["<C-s>"] = { "<cmd>ASToggle<cr>", desc = "Toggle autosave" },
 
@@ -292,6 +315,31 @@ local config = {
       --   end,
       -- },
       --
+      { "andweeb/presence.nvim",
+        require("presence"):setup({
+          -- General options
+          auto_update        = true, -- Update activity based on autocmd events (if `false`, map or manually execute `:lua package.loaded.presence:update()`)
+          neovim_image_text  = "The One True Text Editor", -- Text displayed when hovered over the Neovim image
+          main_image         = "neovim", -- Main image display (either "neovim" or "file")
+          client_id          = "793271441293967371", -- Use your own Discord application client id (not recommended)
+          log_level          = nil, -- Log messages at or above this level (one of the following: "debug", "info", "warn", "error")
+          debounce_timeout   = 10, -- Number of seconds to debounce events (or calls to `:lua package.loaded.presence:update(<filename>, true)`)
+          enable_line_number = false, -- Displays the current line number instead of the current project
+          blacklist          = {}, -- A list of strings or Lua patterns that disable Rich Presence if the current file name, path, or workspace matches
+          buttons            = true, -- Configure Rich Presence button(s), either a boolean to enable/disable, a static table (`{{ label = "<label>", url = "<url>" }, ...}`, or a function(buffer: string, repo_url: string|nil): table)
+          file_assets        = {}, -- Custom file asset definitions keyed by file names and extensions (see default config at `lua/presence/file_assets.lua` for reference)
+          show_time          = true, -- Show the timer
+
+          -- Rich Presence text options
+          editing_text        = "Editing %s", -- Format string rendered when an editable file is loaded in the buffer (either string or function(filename: string): string)
+          file_explorer_text  = "Browsing %s", -- Format string rendered when browsing a file explorer (either string or function(file_explorer_name: string): string)
+          git_commit_text     = "Committing changes", -- Format string rendered when committing changes in git (either string or function(filename: string): string)
+          plugin_manager_text = "Managing plugins", -- Format string rendered when managing plugins (either string or function(plugin_manager_name: string): string)
+          reading_text        = "Reading %s", -- Format string rendered when a read-only or unmodifiable file is loaded in the buffer (either string or function(filename: string): string)
+          workspace_text      = "Working on %s", -- Format string rendered when in a git repository (either string or function(project_name: string|nil, filename: string): string)
+          line_number_text    = "Line %s out of %s", -- Format string rendered when `enable_line_number` is set to true (either string or function(line_number: number, line_count: number): string)
+        }) },
+
       {
         "folke/todo-comments.nvim",
         event = "BufRead",
@@ -299,9 +347,23 @@ local config = {
           require("todo-comments").setup()
         end,
       },
+      { "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+        config = function()
+          require("trouble").setup {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+          }
+        end
+      },
+      { "yegappan/taglist" },
       { "github/copilot.vim" },
+      -- Debugger
       { "puremourning/vimspector" },
+      -- LaTeX
       { "lervag/vimtex" },
+      -- PlatformIO
       { "normen/vim-pio" },
       {
         "iamcco/markdown-preview.nvim",
@@ -316,19 +378,12 @@ local config = {
       { "weirongxu/plantuml-previewer.vim" },
       { "aklt/plantuml-syntax" },
       { "tyru/open-browser.vim" },
-
       -- We also support a key value style plugin definition similar to NvChad:
       -- ["ray-x/lsp_signature.nvim"] = {
       --   event = "BufRead",
       --   config = function()
       --     require("lsp_signature").setup()
       --   end,
-      -- },
-      -- ["weirongxu/plantuml-previewer.vim"] = {
-      --   requires = { {"aklt/plantuml-syntax"} },
-      --   -- depends = "aklt/plantuml-syntax",
-      --   requires = { {"tyru/open-browser.vim"} },
-      --   -- depends = "tyru/open-browser.vim",
       -- },
 
     },
@@ -404,6 +459,10 @@ local config = {
           },
           ["m"] = { name = "Markdown" },
           ["x"] = { name = "LaTeX" },
+          ["t"] = {
+            name = "Terminal",
+            ["t"] = { name = "Trouble" },
+          },
         },
       },
     },
