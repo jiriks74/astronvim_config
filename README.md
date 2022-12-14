@@ -59,14 +59,6 @@ nvim +PackerSync
 
 ## Extra plugins included
 
-- [vimspector](https://github.com/puremourning/vimspector)
-  - Simple plugin for debugging
-  - You need have to have `neovim` python module installed
-
-  ```bash
-  pip3 install neovim
-  ```
-
   - You have to create a file with `Launch` config - see the [plugin repository](https://github.com/puremourning/vimspector)
 - [vim-pio](https://github.com/jiriks74/vim-pio)
   - PlatformIO vim plugin
@@ -94,37 +86,6 @@ nvim +PackerSync
 | CTRL+e   | ["\<C-e\>"]      | Copilot accept    |
 | CTRL+s   | ["\<C-s\>"]      | Toggle autosave   |
 
-### Mappings for vimspector (debugging)
-
-|   Shortcut  |    Vim keybind    |     Description    |
-|-------------|-------------------|--------------------|
-|  Space+d+d  | ["\<leader\>dd"]  | Launch             |
-|  Space+d+S  | ["\<leader\>dS"]  | Stop               |
-|  Space+d+c  | ["\<leader\>dc"]  | Continue           |
-|  Space+d+p  | ["\<leader\>dp"]  | Pause              |
-|  Space+d+e  | ["\<leader\>de"]  | Reset              |
-|  Space+d+r  | ["\<leader\>dr"]  | Restart            |
-|  Space+d+R  | ["\<leader\>dR"]  | Run to cursor      |
-|  Space+d+C  | ["\<leader\>dC"]  | Go to current line |
-|  Space+d+P  | ["\<leader\>dP"]  | Move cursor to the program counter in current frame |
-|             | Breakpoints       |                    |
-| Space+d+b+t | ["\<leader\>dbt"] | Toggle breakpoint  |
-| Space+d+b+l | ["\<leader\>dbl"] | List breakpoints   |
-| Space+d+b+c | ["\<leader\>dbc"] | Clear breakpoints  |
-| Space+d+b+C | ["\<leader\>dbC"] | Toggle CBreakpoint or LogPoint on current line |
-| Space+d+b+f | ["\<leader\>dbf"] | Add a function breakpoint for expression under cursor |
-| Space+d+b+n | ["\<leader\>dbn"] | Jump to next breakpoint |
-| Space+d+b+p | ["\<leader\>dbp"] | Jump to previous breakpoint |
-|             | Step keybinds     |                    |
-| Space+d+s+s | ["\<leader\>dss"] | Step over          |
-| Space+d+s+i | ["\<leader\>dsi"] | Step into          |
-| Space+d+s+o | ["\<leader\>dso"] | Step out           |
-|             | Frame keybinds    |                    |
-| Space+d+f+u | ["\<leader\>dfu"] | Up frame           |
-| Space+d+f+d | ["\<leader\>dfd"] | Down frame         |
-
-There are also some [VSCode like keybinds setup by the plugin](https://github.com/puremourning/vimspector#visual-studio--vscode)
-
 ### Mappings for markdown preview
 
 | Shortcut  |   Vim keybind    |       Description       |
@@ -137,6 +98,8 @@ There are also some [VSCode like keybinds setup by the plugin](https://github.co
 
 ## TODO
 
+- [ ] Nvim-DAP
+  - Modified the default AstroNvim config
 - [ ] [Mappings for `vimtex`](#mappings-for-vimtex)
 - [ ] Better section for `vim-pio`
 - [ ] Add section for setting up debugging
@@ -146,7 +109,6 @@ There are also some [VSCode like keybinds setup by the plugin](https://github.co
 - [ ] Better [`README.md`](https://github.com/jiriks74/astronvim_config/blob/neovim7.2/README.md)
   for [`neovim7.2`](https://github.com/jiriks74/astronvim_config/tree/neovim7.2) branch
   - [ ] Add section redirecting to [`neovim72`](https://github.com/jiriks74/astronvim_config/tree/neovim7.2)
-  branch's [`README.md`](https://github.com/jiriks74/astronvim_config/blob/neovim7.2/README.md) it user has Neovim < 8.0
-- [ ] Add `.vimspector.json` template
+  branch's [`README.md`](https://github.com/jiriks74/astronvim_config/blob/neovim7.2/README.md) if user has Neovim < 8.0
 - [ ] Setting up simple wiki?
 - [ ] Add section for ["weirongxu/plantuml-previewer.vim"](https://github.com/weirongxu/plantuml-previewer.vim)
