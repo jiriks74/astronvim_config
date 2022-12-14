@@ -63,7 +63,6 @@ local config = {
       copilot_no_tab_map = true,
       copilot_assume_mapped = true,
       copilot_tab_fallback = "",
-      vimspector_enable_mappings = 'VISUAL_STUDIO',
 
       -- Taglist
       Tlist_Use_Right_Window = 1,
@@ -211,36 +210,42 @@ local config = {
       ["<leader>bt"] = { "<cmd>BufferLineSortByTabs<cr>", desc = "Sort by tabs" },
       ["<leader>uD"] = { "<cmd>Alpha<cr>", desc = "Alpha dashboard" },
 
-      ["<leader>dd"] = { "<cmd>call vimspector#Launch()<cr>", desc = "Launch" },
-      ["<leader>dS"] = { "<cmd>call vimspector#Stop()<cr>", desc = "Stop" },
-      ["<leader>dc"] = { "<cmd>call vimspector#Continue()<cr>", desc = "Continue" },
-      ["<leader>dp"] = { "<cmd>call vimspector#Pause()<cr>", desc = "Pause" },
-      ["<leader>de"] = { "<cmd>call vimspector#Reset()<cr>", desc = "Reset" },
-      ["<leader>dr"] = { "<cmd>call vimspector#Restart()<cr>", desc = "Restart" },
-      ["<leader>dR"] = { "<cmd>call vimspector#RunToCursor()<cr>", desc = "Run to cursor" },
-      ["<leader>dC"] = { "<cmd>call vimspector#GoToCurrentLine()", desc = "Go to current line" },
-      ["<leader>dP"] = { "<cmd>call vimspector#JumpToProgramCounter()<cr>",
-        desc = "Move Cursor to the program counter in current frame" },
+      -- Debugger mappings
+      -- Config loading
+      ["<leader>dlc"] = { function() require("dap.ext.vscode").load_launchjs(nil, { cppdbg = { "c", "cpp" } }) end, desc = "C/C++" },
 
+      -- Function keys mappings
+      ["<F5>"] = { function() require("dap").continue() end, desc = "Debugger: Start" },
+      ["<F17>"] = { function() require("dap").terminate() end, desc = "Debugger: Stop" }, -- Shift+F5
+      ["<F29>"] = { function() require("dap").restart_frame() end, desc = "Debugger: Restart" }, -- Control+F5
+      ["<F6>"] = { function() require("dap").pause() end, desc = "Debugger: Pause" },
+      ["<F9>"] = { function() require("dap").toggle_breakpoint() end, desc = "Debugger: Toggle Breakpoint" },
+      ["<F10>"] = { function() require("dap").step_over() end, desc = "Debugger: Step Over" },
+      ["<F11>"] = { function() require("dap").step_into() end, desc = "Debugger: Step Into" },
+      ["<F23>"] = { function() require("dap").step_out() end, desc = "Debugger: Step Out" }, -- Shift+F11
+      
       -- Breakpoints
-      ["<leader>dbt"] = { "<cmd>call vimspector#ToggleBreakpoint()<cr>", desc = "Toggle breakpoint" },
-      ["<leader>dbl"] = { "<cmd>call vimspector#ListBreakpoints()<cr>", desc = "List breakpoints" },
-      ["<leader>dbc"] = { "<cmd>call vimspector#ClearBreakpoints()<cr>", desc = "Clear breakpoints" },
-      ["<leader>dbC"] = { "<cmd>call vimspector#ToggleBreakpoint( { trigger expr, hit count expr } )<cr>",
-        desc = "Toggle CBreakpoint or LogPoint on current line" },
-      ["<leader>dbf"] = { "<cmd>call vimspector#AddFunctionBreakpoint( '<cexpr>' )<cr>",
-        desc = "Add a function breakpoint for expression under cursor" },
-      ["<leader>dbn"] = { "<cmd>call vimspector#JumpToNextBreakpoint()<cr>", desc = "Jump to next breakpoint" },
-      ["<leader>dbp"] = { "<cmd>call vimspector#JumpToPreviousBreakpoint()<cr>", desc = "Jump to previous breakpoint" },
-
+      ["<leader>db"] = { function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint (F9)" },
+      ["<leader>dB"] = { function() require("dap").clear_breakpoints() end, desc = "Clear Breakpoints" },
+      
+      -- Session actions
+      ["<leader>dc"] = { function() require("dap").continue() end, desc = "Start/Continue (F5)" },
+      ["<leader>dp"] = { function() require("dap").pause() end, desc = "Pause (F6)" },
+      ["<leader>dr"] = { function() require("dap").restart_frame() end, desc = "Restart (C-F5)" },
+      ["<leader>dq"] = { function() require("dap").close() end, desc = "Close Session" },
+      ["<leader>dQ"] = { function() require("dap").terminate() end, desc = "Terminate Session (S-F5)" },
+      
       -- Step
-      ["<leader>dss"] = { "<cmd>call vimspector#StepOver()<cr>", desc = "Step over" },
-      ["<leader>dsi"] = { "<cmd>call vimspector#StepInto()<cr>", desc = "Step into" },
-      ["<leader>dso"] = { "<cmd>call vimspector#StepOut()<cr>", desc = "Step out" },
+      ["<leader>di"] = { function() require("dap").step_into() end, desc = "Step Into (F11)" },
+      ["<leader>do"] = { function() require("dap").step_over() end, desc = "Step Over (F10)" },
+      ["<leader>dO"] = { function() require("dap").step_out() end, desc = "Step Out (S-F11)" },
 
-      -- Frames
-      ["<leader>dfu"] = { "<cmd>call vimspector#UpFrame()<cr>", desc = "Up frame" },
-      ["<leader>dfd"] = { "<cmd>call vimspector#DownFrame()<cr>", desc = "Down frame" },
+      -- Repls (debugger)
+      ["<leader>dR"] = { function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
+
+      -- Dap-UI
+      ["<leader>du"] = { function() require("dapui").toggle() end, desc = "Toggle Debugger UI" },
+      ["<leader>dh"] = { function() require("dap.ui.widgets").hover() end, desc = "Debugger Hover" },
 
       -- Mardown preview
       ["<leader>mp"] = { "<cmd>MarkdownPreview<cr>", desc = "Markdown preview" },
@@ -314,31 +319,6 @@ local config = {
       --     require("lsp_signature").setup()
       --   end,
       -- },
-      --
-      -- { "andweeb/presence.nvim",
-      --   require("presence"):setup({
-      --     -- General options
-      --     auto_update        = true, -- Update activity based on autocmd events (if `false`, map or manually execute `:lua package.loaded.presence:update()`)
-      --     neovim_image_text  = "The One True Text Editor", -- Text displayed when hovered over the Neovim image
-      --     main_image         = "neovim", -- Main image display (either "neovim" or "file")
-      --     client_id          = "793271441293967371", -- Use your own Discord application client id (not recommended)
-      --     log_level          = nil, -- Log messages at or above this level (one of the following: "debug", "info", "warn", "error")
-      --     debounce_timeout   = 10, -- Number of seconds to debounce events (or calls to `:lua package.loaded.presence:update(<filename>, true)`)
-      --     enable_line_number = false, -- Displays the current line number instead of the current project
-      --     blacklist          = {}, -- A list of strings or Lua patterns that disable Rich Presence if the current file name, path, or workspace matches
-      --     buttons            = true, -- Configure Rich Presence button(s), either a boolean to enable/disable, a static table (`{{ label = "<label>", url = "<url>" }, ...}`, or a function(buffer: string, repo_url: string|nil): table)
-      --     file_assets        = {}, -- Custom file asset definitions keyed by file names and extensions (see default config at `lua/presence/file_assets.lua` for reference)
-      --     show_time          = true, -- Show the timer
-      --
-      --     -- Rich Presence text options
-      --     editing_text        = "Editing %s", -- Format string rendered when an editable file is loaded in the buffer (either string or function(filename: string): string)
-      --     file_explorer_text  = "Browsing %s", -- Format string rendered when browsing a file explorer (either string or function(file_explorer_name: string): string)
-      --     git_commit_text     = "Committing changes", -- Format string rendered when committing changes in git (either string or function(filename: string): string)
-      --     plugin_manager_text = "Managing plugins", -- Format string rendered when managing plugins (either string or function(plugin_manager_name: string): string)
-      --     reading_text        = "Reading %s", -- Format string rendered when a read-only or unmodifiable file is loaded in the buffer (either string or function(filename: string): string)
-      --     workspace_text      = "Working on %s", -- Format string rendered when in a git repository (either string or function(project_name: string|nil, filename: string): string)
-      --     line_number_text    = "Line %s out of %s", -- Format string rendered when `enable_line_number` is set to true (either string or function(line_number: number, line_count: number): string)
-      --   }) },
 
       {
         "folke/todo-comments.nvim",
@@ -359,8 +339,6 @@ local config = {
       },
       { "yegappan/taglist" },
       { "github/copilot.vim" },
-      -- Debugger
-      { "puremourning/vimspector" },
       -- LaTeX
       { "lervag/vimtex" },
       -- PlatformIO
@@ -453,9 +431,7 @@ local config = {
           ["b"] = { name = "Buffer" },
           ["d"] = {
             name = "Debugging",
-            ["b"] = { name = "Breakpoints" },
-            ["s"] = { name = "Step" },
-            ["f"] = { name = "Frames" },
+            ["l"] = { name = "Load launch.json" },
           },
           ["m"] = { name = "Markdown" },
           ["x"] = { name = "LaTeX" },
