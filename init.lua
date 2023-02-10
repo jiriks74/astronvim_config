@@ -308,6 +308,7 @@ local config = {
     init = {
       -- You can disable default plugins as follows:
       -- ["goolord/alpha-nvim"] = { disable = true },
+      ["goolord/alpha-nvim"] = { commit = "21a0f2520ad3a7c32c0822f943368dc063a569fb" },
 
       -- You can also add new plugins here as well:
       -- Add plugins, the packer syntax without the "use"
