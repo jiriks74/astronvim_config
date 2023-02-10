@@ -363,7 +363,7 @@ local config = {
       --     require("lsp_signature").setup()
       --   end,
       -- },
-      ["rebelot/heirline.nvim"] = { commit = "556666aabb57c227cbb14a996b30b2934e5ff7b1" }
+      ["rebelot/heirline.nvim"] = { commit = "556666aabb57c227cbb14a996b30b2934e5ff7b1" },
     },
 
     -- All other entries override the require("<key>").setup({...}) call for default plugins
