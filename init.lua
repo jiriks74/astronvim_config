@@ -208,7 +208,7 @@ local config = {
       ["<leader>bc"] = { "<cmd>BufferLinePickClose<cr>", desc = "Pick to close" },
       ["<leader>bj"] = { "<cmd>BufferLinePick<cr>", desc = "Pick to jump" },
       ["<leader>bt"] = { "<cmd>BufferLineSortByTabs<cr>", desc = "Sort by tabs" },
-      ["<leader>uD"] = { "<cmd>Alpha<cr>", desc = "Alpha dashboard" },
+      -- ["<leader>uD"] = { "<cmd>Alpha<cr>", desc = "Alpha dashboard" },
 
       -- Debugger mappings
       -- Config loading
