@@ -5,7 +5,6 @@
 -- normal format is "key = value". These also handle array like data structures
 -- where a value with no key simply has an implicit numeric key
 local config = {
-
   -- Configure AstroNvim updates
   updater = {
     remote = "origin", -- remote to use
@@ -24,10 +23,8 @@ local config = {
     --   ["remote3"] = "github_user", -- GitHub user assume AstroNvim fork
     -- },
   },
-
   -- Set colorscheme to use
   colorscheme = "default_theme",
-
   -- Add highlight groups in any theme
   highlights = {
     -- init = { -- this table overrides highlights in all themes
@@ -37,7 +34,6 @@ local config = {
     --   Normal = { bg = "#000000" },
     -- },
   },
-
   -- set vim options here (vim.<first_key>.<second_key> =  value)
   options = {
     opt = {
@@ -95,7 +91,6 @@ local config = {
     "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
     "    ██   ████   ████   ██ ██      ██",
   },
-
   -- Default theme configuration
   default_theme = {
     -- Modify the color palette for the default theme
@@ -137,13 +132,11 @@ local config = {
       ["which-key"] = true,
     },
   },
-
   -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
   diagnostics = {
     virtual_text = true,
     underline = true,
   },
-
   -- Extend LSP configuration
   lsp = {
     -- enable servers that you already have installed without mason
@@ -193,7 +186,36 @@ local config = {
       }
     },
   },
-
+  dap = {
+    configurations = {
+      asm = {
+        {
+          name = "Launch file",
+          type = "cppdbg",
+          request = "launch",
+          program = function()
+            return vim.fn.input('Path to executable: ',
+              vim.fn.getcwd() .. '/', 'file')
+          end,
+          cwd = '${workspaceFolder}',
+          stopAtEntry = true
+        },
+        {
+          name = 'Attach to gdbserver :1234',
+          type = 'cppdbg',
+          request = 'launch',
+          MIMode = 'gdb',
+          miDebuggerServerAddress = 'localhost:1234',
+          miDebuggerPath = '/usr/bin/gdb',
+          cwd = '${workspaceFolder}',
+          program = function()
+            return vim.fn.input('Path to executable: ',
+              vim.fn.getcwd() .. '/', 'file')
+          end
+        }
+      }
+    }
+  },
   -- Mapping data with "desc" stored directly by vim.keymap.set().
   --
   -- Please use this mappings table to set keyboard mapping since this is the
@@ -212,7 +234,7 @@ local config = {
 
       -- Debugger mappings
       -- Config loading
-      ["<leader>dlc"] = { function() require("dap.ext.vscode").load_launchjs(nil, { cppdbg = { "c", "cpp" } }) end, desc = "C/C++" },
+      ["<leader>dlc"] = { function() require("dap.ext.vscode").load_launchjs(nil, { cppdbg = { "c", "cpp", "asm" } }) end, desc = "C/C++/asm" },
 
       -- Function keys mappings
       ["<F5>"] = { function() require("dap").continue() end, desc = "Debugger: Start" },
@@ -223,18 +245,18 @@ local config = {
       ["<F10>"] = { function() require("dap").step_over() end, desc = "Debugger: Step Over" },
       ["<F11>"] = { function() require("dap").step_into() end, desc = "Debugger: Step Into" },
       ["<F23>"] = { function() require("dap").step_out() end, desc = "Debugger: Step Out" }, -- Shift+F11
-      
+
       -- Breakpoints
       ["<leader>db"] = { function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint (F9)" },
       ["<leader>dB"] = { function() require("dap").clear_breakpoints() end, desc = "Clear Breakpoints" },
-      
+
       -- Session actions
       ["<leader>dc"] = { function() require("dap").continue() end, desc = "Start/Continue (F5)" },
       ["<leader>dp"] = { function() require("dap").pause() end, desc = "Pause (F6)" },
       ["<leader>dr"] = { function() require("dap").restart_frame() end, desc = "Restart (C-F5)" },
       ["<leader>dq"] = { function() require("dap").close() end, desc = "Close Session" },
       ["<leader>dQ"] = { function() require("dap").terminate() end, desc = "Terminate Session (S-F5)" },
-      
+
       -- Step
       ["<leader>di"] = { function() require("dap").step_into() end, desc = "Step Into (F11)" },
       ["<leader>do"] = { function() require("dap").step_over() end, desc = "Step Over (F10)" },
@@ -302,7 +324,6 @@ local config = {
       -- ["<Tab>"] = { "copilot#Accept('<CR>')", silent = true, expr = true },
     }
   },
-
   -- Configure plugins
   plugins = {
     init = {
@@ -393,7 +414,6 @@ local config = {
       -- ensure_installed = { "prettier", "stylua" },
     },
   },
-
   -- LuaSnip Options
   luasnip = {
     -- Add paths for including more VS Code style snippets in luasnip
@@ -403,7 +423,6 @@ local config = {
       -- javascript = { "javascriptreact" },
     },
   },
-
   -- CMP Source Priorities
   -- modify here the priorities of default cmp sources
   -- higher value == higher priority
@@ -418,7 +437,6 @@ local config = {
       path = 250,
     },
   },
-
   -- Modify which-key registration (Use this with mappings table in the above.)
   ["which-key"] = {
     -- Add bindings which show up as group name
@@ -444,7 +462,6 @@ local config = {
       },
     },
   },
-
   -- This function is run last and is a good place to configuring
   -- augroups/autocommands and custom filetypes also this just pure lua so
   -- anything that doesn't fit in the normal config locations above can go here
