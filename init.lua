@@ -284,12 +284,18 @@ local config = {
       -- Autosave
       ["<C-s>"] = { "<cmd>ASToggle<cr>", desc = "Toggle autosave" },
 
+
       -- quick save
       -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
     },
     t = {
       -- setting a mapping to false will disable it
       -- ["<esc>"] = false,
+    },
+    v = {
+      -- Carbon code sharing
+      ["<leader>c"] = { ":CarbonNow<CR>", desc = "Share code on Carbon", silent = true },
+
     },
     i = {
       -- ["<Tab>"] = { "copilot#Accept('<CR>')", silent = true, expr = true },
@@ -304,6 +310,12 @@ local config = {
       -- You can also add new plugins here as well:
       -- Add plugins, the packer syntax without the "use"
       { "andweeb/presence.nvim" },
+      { "ellisonleao/carbon-now.nvim",
+        event = "BufRead",
+        config = function()
+          require('carbon-now').setup()
+        end,
+      },
       -- {
       --   "ray-x/lsp_signature.nvim",
       --   event = "BufRead",
