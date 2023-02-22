@@ -342,24 +342,41 @@ local config = {
         end
       },
       { "yegappan/taglist" },
+
+      -- Code completion
       { "github/copilot.vim" },
-      -- LaTeX
-      { "lervag/vimtex" },
+
+      -- Code testing
+      -- TBD - no support for GoogleTest yet
+      -- { "nvim-neotest/neotest",
+      --   requires = {
+      --     "nvim-lua/plenary.nvim",
+      --     "nvim-treesitter/nvim-treesitter",
+      --   },
+      -- },
+
       -- PlatformIO
       { "normen/vim-pio" },
+
+      -- Text related
+      { "lervag/vimtex" }, -- LaTeX
       {
         "iamcco/markdown-preview.nvim",
         run = function() vim.fn["mkdp#util#install"]() end,
       },
+      { "weirongxu/plantuml-previewer.vim",
+        requires = { "tyru/open-browser.vim" },
+      },
+      { "aklt/plantuml-syntax" },
+
+      -- Basic editor functionality
       {
         "Pocco81/auto-save.nvim",
         config = function()
           require("auto-save").setup()
         end,
       },
-      { "weirongxu/plantuml-previewer.vim" },
-      { "aklt/plantuml-syntax" },
-      { "tyru/open-browser.vim" },
+
       -- We also support a key value style plugin definition similar to NvChad:
       -- ["ray-x/lsp_signature.nvim"] = {
       --   event = "BufRead",
