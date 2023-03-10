@@ -247,7 +247,7 @@ local config = {
       ["<leader>ftq"] = { "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix" },
       ["<leader>ftl"] = { "<cmd>TroubleToggle loclist<cr>", desc = "Loc List" },
       ["<leader>ftR"] = { "<cmd>TroubleToggle lsp_references<cr>", desc = "Lsp references" },
-      ["<leader>ftt"] = { "<cmd>TroubleToggle<cr>", desc = "Todo Trouble" },
+      -- ["<leader>ftt"] = { "<cmd>TodoTrouble<cr>", desc = "Todo Trouble" },
       -- Autosave
       ["<C-s>"] = { "<cmd>ASToggle<cr>", desc = "Toggle autosave" },
       ["<leader>fs"] = { "<cmd>ASToggle<cr>", desc = "Toggle autosave" },
@@ -426,7 +426,8 @@ local config = {
     -- Show todo comments, warnings, errors, ...
     {
       "folke/trouble.nvim",
-      cmd = { "TroubleToggle", "TodoTrouble" },
+      -- cmd = { "TroubleToggle", "TodoTrouble" }
+      cmd = "TroubleToggle"
     },
     -- TOC (functions, macros, ...)
     {
