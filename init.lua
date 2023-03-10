@@ -255,8 +255,6 @@ local config = {
       -- Autosave
       ["<C-s>"] = { "<cmd>ASToggle<cr>", desc = "Toggle autosave" },
       ["<leader>fs"] = { "<cmd>ASToggle<cr>", desc = "Toggle autosave" },
-      -- Carbon code sharing
-      ["<leader>s"] = { "CarbonNow", desc = "Share code on Carbon", silent = true },
     },
     v = {
       -- Carbon code sharing
@@ -410,7 +408,7 @@ local config = {
           window_theme = "none",
           font_family = "Hack",
           font_size = "18px",
-          bg = "gray",
+          bg = "none",
           line_numbers = true,
           line_height = "133%",
           drop_shadow = false,
