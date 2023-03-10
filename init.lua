@@ -155,6 +155,8 @@ local config = {
   mappings = {
     -- first key is the mode
     n = {
+      ["<leader>ft"] = false,
+      ["<leader>fT"] = { function() require("telescope.builtin").colorscheme { enable_preview = true } end, desc = "Find themes" },
       -- second key is the lefthand side of the map
       -- mappings seen under group name "Buffer"
       ["<leader>bb"] = { "<cmd>tabnew<cr>", desc = "New tab" },
@@ -210,6 +212,7 @@ local config = {
       ["<leader>du"] = { function() require("dapui").toggle() end, desc = "Toggle Debugger UI" },
       ["<leader>dh"] = { function() require("dap.ui.widgets").hover() end, desc = "Debugger Hover" },
       -- Mardown preview
+      ["<leader>m"] = { name = "Markdown" },
       ["<leader>mp"] = { "<cmd>MarkdownPreview<cr>", desc = "Markdown preview" },
       ["<leader>ms"] = { "<cmd>MarkdownPreviewStop<cr>", desc = "Markdown preview stop" },
       ["<leader>mt"] = { "<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown preview toggle" },
@@ -237,10 +240,11 @@ local config = {
       ["<leader>xX"] = { "<cmd>VimtexReloadState<cr>", desc = "Reload the state for the current buffer" },
       ["<leader>xs"] = { "<cmd>VimtexToggleMain<cr>", desc = "Set current file as 'current project'" },
       ["<leader>xa"] = { "<cmd>VimtexContextMenu<cr>", desc = "Show context menu" },
+
+      ["<leader>ft"] = { name = "Trouble, Tagbar" },
       -- Taglist
-      ["<leader>fT"] = { "<cmd>TlistToggle<cr>", desc = "Tagbar toggle " },
+      ["<leader>ftT"] = { "<cmd>TlistToggle<cr>", desc = "Tagbar toggle " },
       -- Trouble
-      -- ["<leader>ft"] = { name = "Trouble" },
       ["<leader>ftx"] = { "<cmd>TroubleToggle<cr>", desc = "Toggle Trouble" },
       ["<leader>ftw"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace diagnostics" },
       ["<leader>ftd"] = { "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document diagnostics" },
@@ -248,11 +252,12 @@ local config = {
       ["<leader>ftl"] = { "<cmd>TroubleToggle loclist<cr>", desc = "Loc List" },
       ["<leader>ftR"] = { "<cmd>TroubleToggle lsp_references<cr>", desc = "Lsp references" },
       -- ["<leader>ftt"] = { "<cmd>TodoTrouble<cr>", desc = "Todo Trouble" },
+      --
       -- Autosave
       ["<C-s>"] = { "<cmd>ASToggle<cr>", desc = "Toggle autosave" },
       ["<leader>fs"] = { "<cmd>ASToggle<cr>", desc = "Toggle autosave" },
       -- Carbon code sharing
-      ["<leader>S"] = { "CarbonNow", desc = "Share code on Carbon", silent = true },
+      ["<leader>s"] = { "CarbonNow", desc = "Share code on Carbon", silent = true },
     },
     v = {
       -- Carbon code sharing
@@ -331,20 +336,20 @@ local config = {
     --   end,
     -- },
     -- By adding to the which-key config and using our helper function you can add more which-key registered bindings
-    {
-      "folke/which-key.nvim",
-      config = function(plugin, opts)
-        require "plugins.configs.which-key" (plugin, opts)
-        -- Add bindings which show up as group name
-        local wk = require "which-key"
-        wk.register({
-          m = { name = "Markdown" },
-          ft = { name = "Trouble" },
-          b = { name = "Buffers" },
-        }, { mode = "n", prefix = "<leader>" })
-      end,
-    },
-    --
+    -- {
+    --   "folke/which-key.nvim",
+    --   config = function(plugin, opts)
+    --     require "plugins.configs.which-key" (plugin, opts)
+    --     -- Add bindings which show up as group name
+    --     local wk = require "which-key"
+    --     wk.register({
+    --       m = { name = "Markdown" },
+    --       ft = { name = "Trouble" },
+    --       b = { name = "Buffers" },
+    --     }, { mode = "n", prefix = "<leader>" })
+    --   end,
+    -- },
+
 
     {
       -- override nvim-cmp plugin
@@ -378,7 +383,7 @@ local config = {
     -- Editorconfig
     {
       "editorconfig/editorconfig-vim",
-      event = "BufRead"
+      event = "User AstroFile"
     },
 
     -- You can also add new plugins here as well:
@@ -421,7 +426,7 @@ local config = {
     -- Comments
     {
       "folke/todo-comments.nvim",
-      event = "BufEnter",
+      event = "User AstroFile",
     },
     -- Show todo comments, warnings, errors, ...
     {
@@ -473,7 +478,7 @@ local config = {
     -- Basic editor functionality
     {
       "Pocco81/auto-save.nvim",
-      event = "UIEnter",
+      event = "User AstroFile",
       config = function()
         require("auto-save").setup()
       end,
