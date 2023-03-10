@@ -155,7 +155,6 @@ local config = {
   mappings = {
     -- first key is the mode
     n = {
-      ["<leader>ft"] = false,
       ["<leader>fT"] = { function() require("telescope.builtin").colorscheme { enable_preview = true } end, desc = "Find themes" },
       -- second key is the lefthand side of the map
       -- mappings seen under group name "Buffer"
@@ -241,7 +240,7 @@ local config = {
       ["<leader>xs"] = { "<cmd>VimtexToggleMain<cr>", desc = "Set current file as 'current project'" },
       ["<leader>xa"] = { "<cmd>VimtexContextMenu<cr>", desc = "Show context menu" },
 
-      ["<leader>ft"] = { name = "Trouble, Tagbar" },
+      ["<leader>ft"] = { desc = false, name = "Trouble, Tagbar" },
       -- Taglist
       ["<leader>ftT"] = { "<cmd>TlistToggle<cr>", desc = "Tagbar toggle " },
       -- Trouble
