@@ -53,15 +53,20 @@ local config = {
       diagnostics_mode = 3,            -- set the visibility of diagnostics in the UI (0=off, 1=only show in status line, 2=virtual text off, 3=all on)
       icons_enabled = true,            -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
       ui_notifications_enabled = true, -- disable notifications when toggling UI elements
+
       -- Copilot
       copilot_no_tab_map = true,
       copilot_assume_mapped = true,
       copilot_tab_fallback = "",
+
       -- Taglist
       Tlist_Use_Right_Window = 1,
       Tlist_GainFocus_On_ToggleOpen = 1,
       Tlist_Auto_Update = 1,
       -- Tlist_Close_On_Select = 1,
+      
+      -- MarkdownPreview
+      mkdp_auto_close = 0
     },
   },
   -- If you need more control, you can use the function()...end notation
@@ -107,14 +112,6 @@ local config = {
     mappings = {
       n = {
         -- ["<leader>lf"] = false -- disable formatting keymap
-        ["<leader>c"] = {
-          function()
-            local bufs = vim.fn.getbufinfo { buflisted = true }
-            require("astronvim.utils.buffer").close(0)
-            if require("astronvim.utils").is_available "alpha-nvim" and not bufs[2] then require("alpha").start(true) end
-          end,
-          desc = "Close buffer",
-        },
       },
     },
     -- add to the global LSP on_attach function
@@ -168,6 +165,17 @@ local config = {
       -- tables with the `name` key will be registered with which-key if it's installed
       -- this is useful for naming menus
       ["<leader>b"] = { name = "Buffers" },
+
+      -- Trigger Alpha dashboard on close when no buffers are left
+      ["<leader>c"] = {
+        function()
+          local bufs = vim.fn.getbufinfo { buflisted = true }
+          require("astronvim.utils.buffer").close(0)
+          if require("astronvim.utils").is_available "alpha-nvim" and not bufs[2] then require("alpha").start(true) end
+        end,
+        desc = "Close buffer",
+      },
+
       -- quick save
       -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
 
@@ -378,30 +386,17 @@ local config = {
     {
       "ellisonleao/carbon-now.nvim",
       cmd = "CarbonNow",
-      config = function()
-        require('carbon-now').setup()
-      end,
     },
 
     -- Comments
     {
       "folke/todo-comments.nvim",
       event = "BufEnter",
-      config = function()
-        require("todo-comments").setup()
-      end
     },
     -- Show todo comments, warnings, errors, ...
     {
       "folke/trouble.nvim",
       cmd = { "TroubleToggle", "TodoTrouble" },
-      config = function()
-        require("trouble").setup {
-          -- your configuration comes here
-          -- or leave it empty to use the default settings
-          -- refer to the configuration section below
-        }
-      end
     },
     -- TOC (functions, macros, ...)
     {
@@ -418,7 +413,8 @@ local config = {
     -- PlatformIO
     {
       "normen/vim-pio",
-      event = "BufEnter"
+      -- event = "BufEnter"
+      cmd = { "PIO", "PIOInit", "PIOInstall", "PIOUninstall", "PIONewProject", "PIOAddLibrary", "PIORemoveLibrary" }
     },
 
     -- Text related
@@ -430,7 +426,7 @@ local config = {
     {
       "iamcco/markdown-preview.nvim",
       event = "BufEnter *.md",
-      run = function() vim.fn["mkdp#util#install"]() end,
+      config = function() vim.fn["mkdp#util#install"]() end,
     },
 
     -- PlantUML
@@ -466,17 +462,24 @@ local config = {
       opts = function(_, opts)
         -- customize the dashboard header
         opts.section.header.val = {
-          " █████  ███████ ████████ ██████   ██████",
-          "██   ██ ██         ██    ██   ██ ██    ██",
-          "███████ ███████    ██    ██████  ██    ██",
-          "██   ██      ██    ██    ██   ██ ██    ██",
-          "██   ██ ███████    ██    ██   ██  ██████",
-          " ",
-          "    ███    ██ ██    ██ ██ ███    ███",
-          "    ████   ██ ██    ██ ██ ████  ████",
-          "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
-          "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
-          "    ██   ████   ████   ██ ██      ██",
+          "███████ ████████ ███████ ███████ ██   ██  █████     ███████ ██    ██ ",
+          "██         ██    ██      ██      ██  ██  ██   ██    ██      ██    ██ ",
+          "███████    ██    █████   █████   █████   ███████    █████   ██    ██ ",
+          "     ██    ██    ██      ██      ██  ██  ██   ██    ██      ██    ██ ",
+          "███████    ██    ███████ ██      ██   ██ ██   ██ ██ ███████  ██████  ",
+          "",
+          "              █████  ███████ ████████ ██████   ██████  ",
+          "             ██   ██ ██         ██    ██   ██ ██    ██ ",
+          "             ███████ ███████    ██    ██████  ██    ██ ",
+          "             ██   ██      ██    ██    ██   ██ ██    ██ ",
+          "             ██   ██ ███████    ██    ██   ██  ██████  ",
+          "                                                     ",
+          "",
+          "                 ███    ██ ██    ██ ██ ███    ███",
+          "                 ████   ██ ██    ██ ██ ████  ████",
+          "                 ██ ██  ██ ██    ██ ██ ██ ████ ██",
+          "                 ██  ██ ██  ██  ██  ██ ██  ██  ██",
+          "                 ██   ████   ████   ██ ██      ██",
         }
         return opts
       end,
