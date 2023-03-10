@@ -210,11 +210,13 @@ local config = {
       -- Dap-UI
       ["<leader>du"] = { function() require("dapui").toggle() end, desc = "Toggle Debugger UI" },
       ["<leader>dh"] = { function() require("dap.ui.widgets").hover() end, desc = "Debugger Hover" },
+
       -- Mardown preview
       ["<leader>m"] = { name = "Markdown" },
       ["<leader>mp"] = { "<cmd>MarkdownPreview<cr>", desc = "Markdown preview" },
       ["<leader>ms"] = { "<cmd>MarkdownPreviewStop<cr>", desc = "Markdown preview stop" },
       ["<leader>mt"] = { "<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown preview toggle" },
+
       -- Vimtex mappings
       ["<leader>x"] = { name = "LaTeX" },
       ["<leader>xi"] = { "<cmd>VimtexInfo<cr>", desc = "Info" },
@@ -240,6 +242,7 @@ local config = {
       ["<leader>xs"] = { "<cmd>VimtexToggleMain<cr>", desc = "Set current file as 'current project'" },
       ["<leader>xa"] = { "<cmd>VimtexContextMenu<cr>", desc = "Show context menu" },
 
+      -- Trouble, Taglist
       ["<leader>ft"] = { desc = false, name = "Trouble, Tagbar" },
       -- Taglist
       ["<leader>ftT"] = { "<cmd>TlistToggle<cr>", desc = "Tagbar toggle " },
