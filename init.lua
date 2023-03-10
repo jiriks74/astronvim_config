@@ -54,18 +54,16 @@ local config = {
       diagnostics_mode = 3,            -- set the visibility of diagnostics in the UI (0=off, 1=only show in status line, 2=virtual text off, 3=all on)
       icons_enabled = true,            -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
       ui_notifications_enabled = true, -- disable notifications when toggling UI elements
-
       -- Copilot
       copilot_no_tab_map = true,
       copilot_assume_mapped = true,
       copilot_tab_fallback = "",
-
       -- Taglist
       Tlist_Use_Right_Window = 1,
       Tlist_GainFocus_On_ToggleOpen = 1,
       Tlist_Auto_Update = 1,
       -- Tlist_Close_On_Select = 1,
-      
+
       -- MarkdownPreview
       mkdp_auto_close = 0
     },
@@ -166,7 +164,6 @@ local config = {
       -- tables with the `name` key will be registered with which-key if it's installed
       -- this is useful for naming menus
       ["<leader>b"] = { name = "Buffers" },
-
       -- Trigger Alpha dashboard on close when no buffers are left
       ["<leader>c"] = {
         function()
@@ -176,7 +173,6 @@ local config = {
         end,
         desc = "Close buffer",
       },
-
       -- quick save
       -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
 
@@ -338,7 +334,7 @@ local config = {
     {
       "folke/which-key.nvim",
       config = function(plugin, opts)
-        require "plugins.configs.which-key"(plugin, opts)
+        require "plugins.configs.which-key" (plugin, opts)
         -- Add bindings which show up as group name
         local wk = require "which-key"
         wk.register({
@@ -379,11 +375,17 @@ local config = {
       end,
     },
 
+    -- Editorconfig
+    {
+      "editorconfig/editorconfig-vim",
+      event = "BufRead"
+    },
+
     -- You can also add new plugins here as well:
     -- Add plugins, the lazy syntax
 
     -- Plugins for other plugins
-    { 
+    {
       "tyru/open-browser.vim",
       cmd = { "OPenBrowser", "OpenBrowserSearch", "OpenBrowserSmartSearch" }
     },
