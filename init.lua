@@ -442,7 +442,7 @@ local config = {
     -- Code completion
     {
       "github/copilot.vim",
-      event = "UIEnter"
+      event = "User AstroFile"
     },
 
     -- PlatformIO
