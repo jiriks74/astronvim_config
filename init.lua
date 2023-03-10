@@ -243,14 +243,14 @@ local config = {
       -- Taglist
       ["<leader>fT"] = { "<cmd>TlistToggle<cr>", desc = "Tagbar toggle " },
       -- Trouble
-      ["<leader>ft"] = { name = "trouble" },
+      -- ["<leader>ft"] = { name = "Trouble" },
       ["<leader>ftx"] = { "<cmd>TroubleToggle<cr>", desc = "Toggle Trouble" },
       ["<leader>ftw"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace diagnostics" },
       ["<leader>ftd"] = { "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document diagnostics" },
       ["<leader>ftq"] = { "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix" },
       ["<leader>ftl"] = { "<cmd>TroubleToggle loclist<cr>", desc = "Loc List" },
       ["<leader>ftR"] = { "<cmd>TroubleToggle lsp_references<cr>", desc = "Lsp references" },
-      ["<leader>ftt"] = { "<cmd>TodoTrouble<cr>", desc = "Todo Trouble" },
+      ["<leader>ftt"] = { "<cmd>TroubleToggle<cr>", desc = "Todo Trouble" },
       -- Autosave
       ["<C-s>"] = { "<cmd>ASToggle<cr>", desc = "Toggle autosave" },
       ["<leader>fs"] = { "<cmd>ASToggle<cr>", desc = "Toggle autosave" },
@@ -259,7 +259,7 @@ local config = {
     },
     v = {
       -- Carbon code sharing
-      ["<leader>c"] = { ":CarbonNow<CR>", desc = "Share code on Carbon", silent = true },
+      ["<leader>s"] = { ":CarbonNow<CR>", desc = "Share code on Carbon", silent = true },
     },
     t = {
       -- setting a mapping to false will disable it
@@ -329,17 +329,19 @@ local config = {
     --   end,
     -- },
     -- By adding to the which-key config and using our helper function you can add more which-key registered bindings
-    -- {
-    --   "folke/which-key.nvim",
-    --   config = function(plugin, opts)
-    --     require "plugins.configs.which-key"(plugin, opts)
-    --     -- Add bindings which show up as group name
-    --     local wk = require "which-key"
-    --     wk.register({
-    --       b = { name = "Buffer" },
-    --     }, { mode = "n", prefix = "<leader>" })
-    --   end,
-    -- },
+    {
+      "folke/which-key.nvim",
+      config = function(plugin, opts)
+        require "plugins.configs.which-key"(plugin, opts)
+        -- Add bindings which show up as group name
+        local wk = require "which-key"
+        wk.register({
+          m = { name = "Markdown" },
+          ft = { name = "Trouble" },
+          b = { name = "Buffers" },
+        }, { mode = "n", prefix = "<leader>" })
+      end,
+    },
     --
 
     {
@@ -366,7 +368,6 @@ local config = {
         opts.experimental = {
           ghost_text = false -- this feature conflict with copilot.vim's preview.
         }
-
         -- return the new table to be used
         return opts
       end,
@@ -376,7 +377,10 @@ local config = {
     -- Add plugins, the lazy syntax
 
     -- Plugins for other plugins
-    { "tyru/open-browser.vim", cmd = { "OPenBrowser", "OpenBrowserSearch", "OpenBrowserSmartSearch" } },
+    { 
+      "tyru/open-browser.vim",
+      cmd = { "OPenBrowser", "OpenBrowserSearch", "OpenBrowserSmartSearch" }
+    },
 
     --Social
     {
@@ -386,6 +390,24 @@ local config = {
     {
       "ellisonleao/carbon-now.nvim",
       cmd = "CarbonNow",
+      opts = {
+        base_url = "https://carbon.now.sh/",
+        open_cmd = "xdg-open",
+        options = {
+          theme = "night-owl",
+          window_theme = "none",
+          font_family = "Hack",
+          font_size = "18px",
+          bg = "gray",
+          line_numbers = true,
+          line_height = "133%",
+          drop_shadow = false,
+          drop_shadow_offset_y = "20px",
+          drop_shadow_blur = "68px",
+          width = "680",
+          watermark = false,
+        },
+      }
     },
 
     -- Comments
