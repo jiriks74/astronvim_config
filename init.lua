@@ -25,7 +25,8 @@ local config = {
     -- },
   },
   -- Set colorscheme to use
-  colorscheme = "astrodark",
+  -- colorscheme = "astrodark",
+  colorscheme = "tokyonight-night",
   -- Add highlight groups in any theme
   highlights = {
     -- init = { -- this table overrides highlights in all themes
@@ -286,6 +287,11 @@ local config = {
   },
   -- Configure plugins
   plugins = {
+    -- Theme
+    {
+      "folke/tokyonight.nvim",
+      event = "UIEnter"
+    },
     -- You can disable default plugins as follows:
     -- { "max397574/better-escape.nvim", enabled = false },
     --
