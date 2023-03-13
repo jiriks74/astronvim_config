@@ -155,7 +155,8 @@ local config = {
   mappings = {
     -- first key is the mode
     n = {
-      ["<leader>fT"] = { function() require("telescope.builtin").colorscheme { enable_preview = true } end, desc = "Find themes" },
+      ["<leader>fT"] = { function() require("telescope.builtin").colorscheme { enable_preview = true } end, desc =
+      "Find themes" },
       -- second key is the lefthand side of the map
       -- mappings seen under group name "Buffer"
       ["<leader>bb"] = { "<cmd>tabnew<cr>", desc = "New tab" },
@@ -179,10 +180,8 @@ local config = {
 
       -- Debugger mappings
       ["<leader>d"] = { name = "Debugger" },
-      ["<leader>dl"] = { name = "Load launch.json" },
-      -- Config loading
-      ["<leader>dlc"] = { function() require("dap.ext.vscode").load_launchjs(nil, { cppdbg = { "c", "cpp", "asm" } }) end, desc =
-      "C/C++/asm" },
+      -- Load launch.json for all supported languages
+      ["<leader>dl"] = { function() require("dap.ext.vscode").load_launchjs(nil, nil) end, desc = "Load launch.json" },
       -- Function keys mappings
       ["<F5>"] = { function() require("dap").continue() end, desc = "Debugger: Start" },
       ["<F17>"] = { function() require("dap").terminate() end, desc = "Debugger: Stop" },        -- Shift+F5
@@ -210,13 +209,11 @@ local config = {
       -- Dap-UI
       ["<leader>du"] = { function() require("dapui").toggle() end, desc = "Toggle Debugger UI" },
       ["<leader>dh"] = { function() require("dap.ui.widgets").hover() end, desc = "Debugger Hover" },
-
       -- Mardown preview
       ["<leader>m"] = { name = "Markdown" },
       ["<leader>mp"] = { "<cmd>MarkdownPreview<cr>", desc = "Markdown preview" },
       ["<leader>ms"] = { "<cmd>MarkdownPreviewStop<cr>", desc = "Markdown preview stop" },
       ["<leader>mt"] = { "<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown preview toggle" },
-
       -- Vimtex mappings
       ["<leader>x"] = { name = "LaTeX" },
       ["<leader>xi"] = { "<cmd>VimtexInfo<cr>", desc = "Info" },
@@ -241,7 +238,6 @@ local config = {
       ["<leader>xX"] = { "<cmd>VimtexReloadState<cr>", desc = "Reload the state for the current buffer" },
       ["<leader>xs"] = { "<cmd>VimtexToggleMain<cr>", desc = "Set current file as 'current project'" },
       ["<leader>xa"] = { "<cmd>VimtexContextMenu<cr>", desc = "Show context menu" },
-
       -- Trouble, Taglist
       ["<leader>ft"] = { desc = false, name = "Trouble, Tagbar" },
       -- Taglist
@@ -483,6 +479,16 @@ local config = {
         require("auto-save").setup()
       end,
     },
+
+    -- Tasks.json
+    {
+      "stevearc/overseer.nvim",
+      cmd = { "OverseerOpen", "OverseerClose", "OverseerToggle", "OverseerSaveBundle", "OverseerLoadBundle",
+        "OverseerDeleteBundle", "OverseerRunCmd", "OverseerRun", "OverseerInfo", "OverseerBuild", "OverseerQuickAction",
+        "OverseerTaskAction ", "OverseerClearCache" },
+      opts = {}
+    },
+
 
     -- {
     --   "ray-x/lsp_signature.nvim",
