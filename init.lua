@@ -180,8 +180,14 @@ local config = {
 
       -- Debugger mappings
       ["<leader>d"] = { name = "Debugger" },
+      ["<leader>dl"] = { name = "Load launch.json" },
+      -- Config loading
+      ["<leader>dlc"] = { function() require("dap.ext.vscode").load_launchjs(nil, { cppdbg = { "c", "cpp", "asm" } }) end, desc =
+      "C/C++/asm" },
+      ["<leader>dle"] = { function() require("dap.ext.vscode").load_launchjs(nil, { node2 = { "javascriptreact", "typescriptreact", "typescript", "javascript" }}) end, desc =
+      "Node" },
       -- Load launch.json for all supported languages
-      ["<leader>dl"] = { function() require("dap.ext.vscode").load_launchjs(nil, nil) end, desc = "Load launch.json" },
+      ["<leader>dla"] = { function() require("dap.ext.vscode").load_launchjs(nil, nil) end, desc = "All" },
       -- Function keys mappings
       ["<F5>"] = { function() require("dap").continue() end, desc = "Debugger: Start" },
       ["<F17>"] = { function() require("dap").terminate() end, desc = "Debugger: Stop" },        -- Shift+F5
