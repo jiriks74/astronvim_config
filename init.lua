@@ -9,15 +9,15 @@
 local config = {
   -- Configure AstroNvim updates
   updater = {
-    remote = "origin",     -- remote to use
-    channel = "nightly",   -- "stable" or "nightly"
-    version = "latest",    -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
-    branch = "nightly",    -- branch name (NIGHTLY ONLY)
-    commit = nil,          -- commit hash (NIGHTLY ONLY)
-    pin_plugins = nil,     -- nil, true, false (nil will pin plugins on stable only)
-    skip_prompts = false,  -- skip prompts about breaking changes
+    remote = "origin", -- remote to use
+    channel = "nightly", -- "stable" or "nightly"
+    version = "latest", -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
+    branch = "nightly", -- branch name (NIGHTLY ONLY)
+    commit = nil, -- commit hash (NIGHTLY ONLY)
+    pin_plugins = nil, -- nil, true, false (nil will pin plugins on stable only)
+    skip_prompts = false, -- skip prompts about breaking changes
     show_changelog = true, -- show the changelog after performing an update
-    auto_quit = false,     -- automatically quit the current session after a successful update
+    auto_quit = false, -- automatically quit the current session after a successful update
     -- remotes = { -- easily add new remotes to track
     --   ["remote_name"] = "https://remote_url.come/repo.git", -- full remote url
     --   ["remote2"] = "github_user/repo", -- GitHub user/repo shortcut,
@@ -41,18 +41,18 @@ local config = {
     opt = {
       -- set to true or false etc.
       relativenumber = true, -- sets vim.opt.relativenumber
-      number = true,         -- sets vim.opt.number
-      spell = false,         -- sets vim.opt.spell
-      signcolumn = "auto",   -- sets vim.opt.signcolumn to auto
-      wrap = false,          -- sets vim.opt.wrap
+      number = true, -- sets vim.opt.number
+      spell = false, -- sets vim.opt.spell
+      signcolumn = "auto", -- sets vim.opt.signcolumn to auto
+      wrap = false, -- sets vim.opt.wrap
     },
     g = {
-      mapleader = " ",                 -- sets vim.g.mapleader
-      autoformat_enabled = true,       -- enable or disable auto formatting at start (lsp.formatting.format_on_save must be enabled)
-      cmp_enabled = true,              -- enable completion at start
-      autopairs_enabled = true,        -- enable autopairs at start
-      diagnostics_mode = 3,            -- set the visibility of diagnostics in the UI (0=off, 1=only show in status line, 2=virtual text off, 3=all on)
-      icons_enabled = true,            -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
+      mapleader = " ", -- sets vim.g.mapleader
+      autoformat_enabled = true, -- enable or disable auto formatting at start (lsp.formatting.format_on_save must be enabled)
+      cmp_enabled = true, -- enable completion at start
+      autopairs_enabled = true, -- enable autopairs at start
+      diagnostics_mode = 3, -- set the visibility of diagnostics in the UI (0=off, 1=only show in status line, 2=virtual text off, 3=all on)
+      icons_enabled = true, -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
       ui_notifications_enabled = true, -- disable notifications when toggling UI elements
       -- Copilot
       copilot_no_tab_map = true,
@@ -65,7 +65,7 @@ local config = {
       -- Tlist_Close_On_Select = 1,
 
       -- MarkdownPreview
-      mkdp_auto_close = 0
+      mkdp_auto_close = 0,
     },
   },
   -- If you need more control, you can use the function()...end notation
@@ -91,7 +91,7 @@ local config = {
     formatting = {
       -- control auto formatting on save
       format_on_save = {
-        enabled = false,    -- enable or disable format on save globally
+        enabled = false, -- enable or disable format on save globally
         allow_filetypes = { -- enable format on save for specified filetypes only
           -- "go",
         },
@@ -155,8 +155,10 @@ local config = {
   mappings = {
     -- first key is the mode
     n = {
-      ["<leader>fT"] = { function() require("telescope.builtin").colorscheme { enable_preview = true } end, desc =
-      "Find themes" },
+      ["<leader>fT"] = {
+        function() require("telescope.builtin").colorscheme { enable_preview = true } end,
+        desc = "Find themes",
+      },
       -- second key is the lefthand side of the map
       -- mappings seen under group name "Buffer"
       ["<leader>bb"] = { "<cmd>tabnew<cr>", desc = "New tab" },
@@ -182,39 +184,21 @@ local config = {
       ["<leader>d"] = { name = "Debugger" },
       ["<leader>dl"] = { name = "Load launch.json" },
       -- Config loading
-      ["<leader>dlc"] = { function() require("dap.ext.vscode").load_launchjs(nil, { cppdbg = { "c", "cpp", "asm" } }) end, desc =
-      "C/C++/asm" },
-      ["<leader>dln"] = { function() require("dap.ext.vscode").load_launchjs(nil, { node2 = { "javascript", "javascriptreact", "typescriptreact", "typescript" }}) end, desc =
-      "Node" },
+      ["<leader>dlc"] = {
+        function() require("dap.ext.vscode").load_launchjs(nil, { cppdbg = { "c", "cpp", "asm" } }) end,
+        desc = "C/C++/asm",
+      },
+      ["<leader>dln"] = {
+        function()
+          require("dap.ext.vscode").load_launchjs(
+            nil,
+            { node2 = { "javascript", "javascriptreact", "typescriptreact", "typescript" } }
+          )
+        end,
+        desc = "Node",
+      },
       -- Load launch.json for all supported languages
       ["<leader>dla"] = { function() require("dap.ext.vscode").load_launchjs(nil, nil) end, desc = "All" },
-      -- Function keys mappings
-      ["<F5>"] = { function() require("dap").continue() end, desc = "Debugger: Start" },
-      ["<F17>"] = { function() require("dap").terminate() end, desc = "Debugger: Stop" },        -- Shift+F5
-      ["<F29>"] = { function() require("dap").restart_frame() end, desc = "Debugger: Restart" }, -- Control+F5
-      ["<F6>"] = { function() require("dap").pause() end, desc = "Debugger: Pause" },
-      ["<F9>"] = { function() require("dap").toggle_breakpoint() end, desc = "Debugger: Toggle Breakpoint" },
-      ["<F10>"] = { function() require("dap").step_over() end, desc = "Debugger: Step Over" },
-      ["<F11>"] = { function() require("dap").step_into() end, desc = "Debugger: Step Into" },
-      ["<F23>"] = { function() require("dap").step_out() end, desc = "Debugger: Step Out" }, -- Shift+F11
-      -- Breakpoints
-      ["<leader>db"] = { function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint (F9)" },
-      ["<leader>dB"] = { function() require("dap").clear_breakpoints() end, desc = "Clear Breakpoints" },
-      -- Session actions
-      ["<leader>dc"] = { function() require("dap").continue() end, desc = "Start/Continue (F5)" },
-      ["<leader>dp"] = { function() require("dap").pause() end, desc = "Pause (F6)" },
-      ["<leader>dr"] = { function() require("dap").restart_frame() end, desc = "Restart (C-F5)" },
-      ["<leader>dq"] = { function() require("dap").close() end, desc = "Close Session" },
-      ["<leader>dQ"] = { function() require("dap").terminate() end, desc = "Terminate Session (S-F5)" },
-      -- Step
-      ["<leader>di"] = { function() require("dap").step_into() end, desc = "Step Into (F11)" },
-      ["<leader>do"] = { function() require("dap").step_over() end, desc = "Step Over (F10)" },
-      ["<leader>dO"] = { function() require("dap").step_out() end, desc = "Step Out (S-F11)" },
-      -- Repls (debugger)
-      ["<leader>dR"] = { function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
-      -- Dap-UI
-      ["<leader>du"] = { function() require("dapui").toggle() end, desc = "Toggle Debugger UI" },
-      ["<leader>dh"] = { function() require("dap.ui.widgets").hover() end, desc = "Debugger Hover" },
       -- Mardown preview
       ["<leader>m"] = { name = "Markdown" },
       ["<leader>mp"] = { "<cmd>MarkdownPreview<cr>", desc = "Markdown preview" },
@@ -293,7 +277,7 @@ local config = {
     -- Theme
     {
       "folke/tokyonight.nvim",
-      event = "UIEnter"
+      event = "UIEnter",
     },
     -- You can disable default plugins as follows:
     -- { "max397574/better-escape.nvim", enabled = false },
@@ -353,7 +337,7 @@ local config = {
     -- },
     {
       "dstein64/vim-startuptime",
-      cmd = "StartupTime"
+      cmd = "StartupTime",
     },
 
     {
@@ -367,10 +351,15 @@ local config = {
         local luasnip = require "luasnip"
         -- modify the mapping part of the table
         opts.mapping["<CR>"] = cmp.mapping.confirm { select = false }
-        opts.mapping["<Tab>"] = cmp.mapping(function(fallback)
-          vim.api.nvim_feedkeys(vim.fn['copilot#Accept'](vim.api.nvim_replace_termcodes('<Tab>', true, true, true)), 'n',
-            true)
-        end)
+        opts.mapping["<Tab>"] = cmp.mapping(
+          function(fallback)
+            vim.api.nvim_feedkeys(
+              vim.fn["copilot#Accept"](vim.api.nvim_replace_termcodes("<Tab>", true, true, true)),
+              "n",
+              true
+            )
+          end
+        )
         if luasnip.expandable() then
           luasnip.expand()
         elseif luasnip.expand_or_jumpable() then
@@ -378,7 +367,7 @@ local config = {
           fallback()
         end
         opts.experimental = {
-          ghost_text = false -- this feature conflict with copilot.vim's preview.
+          ghost_text = false, -- this feature conflict with copilot.vim's preview.
         }
         -- return the new table to be used
         return opts
@@ -388,7 +377,7 @@ local config = {
     -- Editorconfig
     {
       "editorconfig/editorconfig-vim",
-      event = "User AstroFile"
+      event = "User AstroFile",
     },
 
     -- You can also add new plugins here as well:
@@ -397,13 +386,13 @@ local config = {
     -- Plugins for other plugins
     {
       "tyru/open-browser.vim",
-      cmd = { "OPenBrowser", "OpenBrowserSearch", "OpenBrowserSmartSearch" }
+      cmd = { "OPenBrowser", "OpenBrowserSearch", "OpenBrowserSmartSearch" },
     },
 
     --Social
     {
       "andweeb/presence.nvim",
-      event = "UIEnter"
+      event = "UIEnter",
     },
     {
       "ellisonleao/carbon-now.nvim",
@@ -425,7 +414,7 @@ local config = {
           width = "680",
           watermark = false,
         },
-      }
+      },
     },
 
     -- Comments
@@ -437,32 +426,32 @@ local config = {
     {
       "folke/trouble.nvim",
       -- cmd = { "TroubleToggle", "TodoTrouble" }
-      cmd = "TroubleToggle"
+      cmd = "TroubleToggle",
     },
     -- TOC (functions, macros, ...)
     {
       "yegappan/taglist",
-      cmd = "TlistToggle"
+      cmd = "TlistToggle",
     },
 
     -- Code completion
     {
       "github/copilot.vim",
-      event = "User AstroFile"
+      event = "User AstroFile",
     },
 
     -- PlatformIO
     {
       "normen/vim-pio",
       -- event = "BufEnter"
-      cmd = { "PIO", "PIOInit", "PIOInstall", "PIOUninstall", "PIONewProject", "PIOAddLibrary", "PIORemoveLibrary" }
+      cmd = { "PIO", "PIOInit", "PIOInstall", "PIOUninstall", "PIONewProject", "PIOAddLibrary", "PIORemoveLibrary" },
     },
 
     -- Text related
     {
       -- LaTeX
       "lervag/vimtex",
-      event = "BufEnter *.tex"
+      event = "BufEnter *.tex",
     },
     {
       "iamcco/markdown-preview.nvim",
@@ -477,27 +466,36 @@ local config = {
     },
     {
       "aklt/plantuml-syntax",
-      event = "BufEnter *.uml"
+      event = "BufEnter *.uml",
     },
 
     -- Basic editor functionality
     {
       "Pocco81/auto-save.nvim",
       event = "User AstroFile",
-      config = function()
-        require("auto-save").setup()
-      end,
+      config = function() require("auto-save").setup() end,
     },
 
     -- Tasks.json
     {
       "stevearc/overseer.nvim",
-      cmd = { "OverseerOpen", "OverseerClose", "OverseerToggle", "OverseerSaveBundle", "OverseerLoadBundle",
-        "OverseerDeleteBundle", "OverseerRunCmd", "OverseerRun", "OverseerInfo", "OverseerBuild", "OverseerQuickAction",
-        "OverseerTaskAction ", "OverseerClearCache" },
-      opts = {}
+      cmd = {
+        "OverseerOpen",
+        "OverseerClose",
+        "OverseerToggle",
+        "OverseerSaveBundle",
+        "OverseerLoadBundle",
+        "OverseerDeleteBundle",
+        "OverseerRunCmd",
+        "OverseerRun",
+        "OverseerInfo",
+        "OverseerBuild",
+        "OverseerQuickAction",
+        "OverseerTaskAction ",
+        "OverseerClearCache",
+      },
+      opts = {},
     },
-
 
     -- {
     --   "ray-x/lsp_signature.nvim",
