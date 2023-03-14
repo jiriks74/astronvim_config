@@ -351,7 +351,10 @@ local config = {
     --     }, { mode = "n", prefix = "<leader>" })
     --   end,
     -- },
-
+    {
+      "dstein64/vim-startuptime",
+      cmd = "StartupTime"
+    },
 
     {
       -- override nvim-cmp plugin
