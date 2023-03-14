@@ -184,7 +184,7 @@ local config = {
       -- Config loading
       ["<leader>dlc"] = { function() require("dap.ext.vscode").load_launchjs(nil, { cppdbg = { "c", "cpp", "asm" } }) end, desc =
       "C/C++/asm" },
-      ["<leader>dln"] = { function() require("dap.ext.vscode").load_launchjs(nil, { node2 = { "javascriptreact", "typescriptreact", "typescript", "javascript" }}) end, desc =
+      ["<leader>dln"] = { function() require("dap.ext.vscode").load_launchjs(nil, { node2 = { "javascript", "javascriptreact", "typescriptreact", "typescript" }}) end, desc =
       "Node" },
       -- Load launch.json for all supported languages
       ["<leader>dla"] = { function() require("dap.ext.vscode").load_launchjs(nil, nil) end, desc = "All" },
