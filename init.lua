@@ -9,15 +9,15 @@
 local config = {
   -- Configure AstroNvim updates
   updater = {
-    remote = "origin", -- remote to use
-    channel = "nightly", -- "stable" or "nightly"
-    version = "latest", -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
-    branch = "nightly", -- branch name (NIGHTLY ONLY)
-    commit = nil, -- commit hash (NIGHTLY ONLY)
-    pin_plugins = nil, -- nil, true, false (nil will pin plugins on stable only)
-    skip_prompts = false, -- skip prompts about breaking changes
+    remote = "origin",     -- remote to use
+    channel = "nightly",   -- "stable" or "nightly"
+    version = "latest",    -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
+    branch = "nightly",    -- branch name (NIGHTLY ONLY)
+    commit = nil,          -- commit hash (NIGHTLY ONLY)
+    pin_plugins = nil,     -- nil, true, false (nil will pin plugins on stable only)
+    skip_prompts = false,  -- skip prompts about breaking changes
     show_changelog = true, -- show the changelog after performing an update
-    auto_quit = false, -- automatically quit the current session after a successful update
+    auto_quit = false,     -- automatically quit the current session after a successful update
     -- remotes = { -- easily add new remotes to track
     --   ["remote_name"] = "https://remote_url.come/repo.git", -- full remote url
     --   ["remote2"] = "github_user/repo", -- GitHub user/repo shortcut,
@@ -41,18 +41,18 @@ local config = {
     opt = {
       -- set to true or false etc.
       relativenumber = true, -- sets vim.opt.relativenumber
-      number = true, -- sets vim.opt.number
-      spell = false, -- sets vim.opt.spell
-      signcolumn = "auto", -- sets vim.opt.signcolumn to auto
-      wrap = false, -- sets vim.opt.wrap
+      number = true,         -- sets vim.opt.number
+      spell = false,         -- sets vim.opt.spell
+      signcolumn = "auto",   -- sets vim.opt.signcolumn to auto
+      wrap = false,          -- sets vim.opt.wrap
     },
     g = {
-      mapleader = " ", -- sets vim.g.mapleader
-      autoformat_enabled = true, -- enable or disable auto formatting at start (lsp.formatting.format_on_save must be enabled)
-      cmp_enabled = true, -- enable completion at start
-      autopairs_enabled = true, -- enable autopairs at start
-      diagnostics_mode = 3, -- set the visibility of diagnostics in the UI (0=off, 1=only show in status line, 2=virtual text off, 3=all on)
-      icons_enabled = true, -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
+      mapleader = " ",                 -- sets vim.g.mapleader
+      autoformat_enabled = true,       -- enable or disable auto formatting at start (lsp.formatting.format_on_save must be enabled)
+      cmp_enabled = true,              -- enable completion at start
+      autopairs_enabled = true,        -- enable autopairs at start
+      diagnostics_mode = 3,            -- set the visibility of diagnostics in the UI (0=off, 1=only show in status line, 2=virtual text off, 3=all on)
+      icons_enabled = true,            -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
       ui_notifications_enabled = true, -- disable notifications when toggling UI elements
       -- Copilot
       copilot_no_tab_map = true,
@@ -91,7 +91,7 @@ local config = {
     formatting = {
       -- control auto formatting on save
       format_on_save = {
-        enabled = false, -- enable or disable format on save globally
+        enabled = false,    -- enable or disable format on save globally
         allow_filetypes = { -- enable format on save for specified filetypes only
           -- "go",
         },
@@ -181,7 +181,6 @@ local config = {
       -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
 
       -- Debugger mappings
-      ["<leader>d"] = { name = "Debugger" },
       ["<leader>dl"] = { name = "Load launch.json" },
       -- Config loading
       ["<leader>dlc"] = {
@@ -200,12 +199,12 @@ local config = {
       -- Load launch.json for all supported languages
       ["<leader>dla"] = { function() require("dap.ext.vscode").load_launchjs(nil, nil) end, desc = "All" },
       -- Mardown preview
-      ["<leader>m"] = { name = "Markdown" },
+      ["<leader>m"] = { name = " Markdown" },
       ["<leader>mp"] = { "<cmd>MarkdownPreview<cr>", desc = "Markdown preview" },
       ["<leader>ms"] = { "<cmd>MarkdownPreviewStop<cr>", desc = "Markdown preview stop" },
       ["<leader>mt"] = { "<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown preview toggle" },
       -- Vimtex mappings
-      ["<leader>x"] = { name = "LaTeX" },
+      -- ["<leader>x"] = { name = " LaTeX" },
       ["<leader>xi"] = { "<cmd>VimtexInfo<cr>", desc = "Info" },
       ["<leader>xI"] = { "<cmd>VimtexInfoFull<cr>", desc = "Full info" },
       ["<leader>xt"] = { "<cmd>VimtexTocOpen<cr>", desc = "Open table of contents" },
