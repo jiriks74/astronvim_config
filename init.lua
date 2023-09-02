@@ -182,6 +182,10 @@ local config = {
 
       -- Debugger mappings
       ["<leader>dl"] = { name = "Load launch.json" },
+      ["<leader>L"] = {
+        "<cmd>LiveServer<cr>",
+        desc = " Live server"
+      },
       -- Config loading
       ["<leader>dlc"] = {
         function() require("dap.ext.vscode").load_launchjs(nil, { cppdbg = { "c", "cpp", "asm" } }) end,
@@ -204,7 +208,7 @@ local config = {
       ["<leader>ms"] = { "<cmd>MarkdownPreviewStop<cr>", desc = "Markdown preview stop" },
       ["<leader>mt"] = { "<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown preview toggle" },
       -- Vimtex mappings
-      -- ["<leader>x"] = { name = " LaTeX" },
+      ["<leader>x"] = { name = " LaTeX" },
       ["<leader>xi"] = { "<cmd>VimtexInfo<cr>", desc = "Info" },
       ["<leader>xI"] = { "<cmd>VimtexInfoFull<cr>", desc = "Full info" },
       ["<leader>xt"] = { "<cmd>VimtexTocOpen<cr>", desc = "Open table of contents" },
@@ -508,6 +512,15 @@ local config = {
       "normen/vim-pio",
       -- event = "BufEnter"
       cmd = { "PIO", "PIOInit", "PIOInstall", "PIOUninstall", "PIONewProject", "PIOAddLibrary", "PIORemoveLibrary" },
+    },
+
+    -- Live server
+    {
+      "aurum77/live-server.nvim",
+      run = function()
+        require"live_server.util".install()
+      end,
+      cmd = { "LiveServer", "LiveServerStart", "LiveServerStop" },
     },
 
     -- Text related
