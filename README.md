@@ -1,3 +1,5 @@
+# THIS REPOSITORY MOVED TO https://gitea.stefka.eu/jiriks74/astronvim_config
+
 # My [AstroNvim](https://github.com/AstroNvim/AstroNvim) config
 
 ## README for the merlin server at FIT VUT can be found [here](https://github.com/jiriks74/astronvim_config/tree/merlin)
